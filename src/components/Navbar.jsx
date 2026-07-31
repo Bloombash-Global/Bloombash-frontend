@@ -14,7 +14,7 @@ function Navbar() {
 
   return (
     <nav className='w-full bg-white relative z-50'>
-      <div className='flex items-center justify-between mx-auto max-w-[1248px] h-[60px] md:h-[80px] mt-3 md:mt-5 px-4 sm:px-6'>
+      <div className='flex items-center justify-between mx-auto max-w-312 h-[60px] md:h-[80px] mt-3 md:mt-5 px-4 sm:px-6'>
         {/* Logo */}
         <img
           src={logo}
