@@ -3,8 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/Bloombash Logo.png";
 
 const navLinks = [
-  { label: "Services", type: "scroll", target: "services" },
-  { label: "About Us", type: "scroll", target: "about" },
+  { label: "Services", type: "route", target: "services" },
+  { label: "AboutUs", type: "route", target: "/about" },
   { label: "Industries", type: "scroll", target: "industries" },
   { label: "Values", type: "scroll", target: "values" },
   { label: "Contact", type: "route", target: "/contact" },
