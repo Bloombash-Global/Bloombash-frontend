@@ -1,25 +1,22 @@
 import "./animations.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import WhatWeBuild from "./components/WhatWeBuild";
-import CoreValues from "./components/CoreValues";
-import Industries from "./components/Industries";
-import HowWeWork from "./components/HowWeWork";
-import BuildCTA from "./components/BuildCTA";
 import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import About from "./pages/About";
 
 function App() {
   return (
-    <div>
-      <Navbar />
-      <Hero />
-      <WhatWeBuild />
-      <CoreValues />
-      <Industries />
-      <HowWeWork />
-      <BuildCTA />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 

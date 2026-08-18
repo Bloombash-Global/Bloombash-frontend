@@ -1,16 +1,45 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/Bloombash Logo.png";
 
-const navLinks = ["Services", "About Us", "Industries", "Values", "Contact"];
+const navLinks = [
+  { label: "Services", type: "route", target: "services" },
+  { label: "AboutUs", type: "route", target: "/about" },
+  { label: "Industries", type: "scroll", target: "industries" },
+  { label: "Values", type: "scroll", target: "values" },
+  { label: "Contact", type: "route", target: "/contact" },
+];
 
 function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const timer = setTimeout(() => setMounted(true), 50);
     return () => clearTimeout(timer);
   }, []);
+
+  const handleNavClick = link => {
+    if (link.type === "scroll") {
+      if (location.pathname === "/") {
+        document
+          .getElementById(link.target)
+          ?.scrollIntoView({ behavior: "smooth" });
+      } else {
+        navigate("/");
+        setTimeout(() => {
+          document
+            .getElementById(link.target)
+            ?.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    } else {
+      navigate(link.target);
+    }
+    setMenuOpen(false);
+  };
 
   return (
     <nav className='w-full bg-white relative z-50'>
@@ -31,14 +60,15 @@ function Navbar() {
         <ul className='hidden lg:flex items-center gap-8 xl:gap-[54px]'>
           {navLinks.map((link, index) => (
             <li
-              key={link}
+              key={link.label}
+              onClick={() => handleNavClick(link)}
               className={`cursor-pointer font-semibold text-base xl:text-[18px] text-[#020A23] leading-none font-inter hover:text-purple-700 transition-colors ${mounted ? "anim-visible" : "anim-hidden"}`}
               style={{
                 animation: mounted
                   ? `fadeInDown 0.6s cubic-bezier(0.22,1,0.36,1) ${0.1 + index * 0.08}s both`
                   : "none",
               }}>
-              {link}
+              {link.label}
             </li>
           ))}
         </ul>
@@ -84,10 +114,10 @@ function Navbar() {
         <ul className='flex flex-col gap-2'>
           {navLinks.map(link => (
             <li
-              key={link}
+              key={link.label}
               className='cursor-pointer font-semibold text-[18px] text-[#020A23] py-3 border-b border-gray-100 hover:text-purple-700 transition-colors'
-              onClick={() => setMenuOpen(false)}>
-              {link}
+              onClick={() => handleNavClick(link)}>
+              {link.label}
             </li>
           ))}
         </ul>
