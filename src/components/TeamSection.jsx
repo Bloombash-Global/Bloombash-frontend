@@ -10,14 +10,14 @@ const team = [
   {
     image: samsonImg,
     name: "Oluwapelumi Samson",
-    role: "iOS Engineer",
+    role: "CTO and Co-founder",
     description:
       "A dedicated iOS Engineer with over 5 years of experience crafting intuitive, high-quality applications across iOS and iPadOS. Focused on building efficient solutions using Swift, SwiftUI, and modern Apple frameworks, with a strong emphasis on clean architecture, performance optimization, and delivering seamless user experiences.",
   },
   {
     image: babajideImg,
     name: "Babajide Awodire",
-    role: "Software Engineer",
+    role: "CEO and Co-founder",
     description:
       "A passionate Software Engineer with over 8 years of experience transforming ideas into elegant, high-performing Android applications and libraries.",
   },
@@ -38,9 +38,9 @@ const team = [
   {
     image: troyImg,
     name: "Troy Johnson",
-    role: "Frontend Developer",
+    role: "Web Developer",
     description:
-      "A dedicated Frontend Developer with over 2 years experience and a strong foundation in building responsive, performant web interfaces. Skilled in React, Tailwind CSS, and modern JavaScript, with a focus on clean component architecture, pixel-accurate implementation, and translating design systems into scalable, maintainable code.",
+      "A passionate Web Developer with 2 years of experience building responsive and performant web applications. Skilled in React, JavaScript, Tailwind CSS, and modern web technologies, with a strong focus on clean architecture, algorithmic problem-solving, performance optimization, and building maintainable solutions that scale.",
   },
 ];
 
@@ -53,9 +53,7 @@ function TeamSection() {
   const visible = isInView ? "anim-visible" : "";
 
   return (
-    <section
-      ref={sectionRef}
-      className='w-full py-24 px-4 sm:px-6'>
+    <section ref={sectionRef} className='w-full py-24 px-4 sm:px-6'>
       <div className='max-w-6xl mx-auto'>
         {/* Header */}
         <div className='flex flex-col items-center text-center gap-4 mb-16'>
