@@ -1,3 +1,5 @@
+import useInView from "../hooks/useInView";
+
 import samsonImg from "../assets/Oluwapelumi Samson.png";
 import babajideImg from "../assets/Babajide Awodire.png";
 import adetolaImg from "../assets/Adetola Adebayo.png";
@@ -43,36 +45,51 @@ const team = [
 ];
 
 function TeamSection() {
+  const [sectionRef, isInView] = useInView({
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px",
+  });
+
+  const visible = isInView ? "anim-visible" : "";
+
   return (
-    <section className='w-full py-24 px-4 sm:px-6'>
+    <section
+      ref={sectionRef}
+      className='w-full py-24 px-4 sm:px-6'>
       <div className='max-w-6xl mx-auto'>
         {/* Header */}
         <div className='flex flex-col items-center text-center gap-4 mb-16'>
-          <div className='flex items-center gap-2 px-4 py-2 rounded-full border border-purple-200'>
+          <div
+            className={`flex items-center gap-2 px-4 py-2 rounded-full border border-purple-200 anim-hidden anim-fade-down ${visible}`}>
             <span className='w-2 h-2 rounded-full bg-purple-600' />
             <span className='font-inter font-semibold text-sm text-purple-700'>
               MEET THE TEAM
             </span>
           </div>
 
-          <h2 className='font-inter font-bold text-3xl sm:text-4xl md:text-[40px] text-[#0B0B2B]'>
+          <h2
+            className={`font-inter font-bold text-3xl sm:text-4xl md:text-[40px] text-[#0B0B2B] anim-hidden anim-fade-up ${visible} anim-delay-2`}>
             The people behind the <span className='text-[#7C3AED]'>Vision</span>
           </h2>
 
-          <p className='font-inter text-base text-gray-600 max-w-xl'>
+          <p
+            className={`font-inter text-base text-gray-600 max-w-xl anim-hidden anim-fade-up ${visible} anim-delay-3`}>
             A focused team of strategists, designers, engineers, and innovators
             helping ideas grow into meaningful products.
           </p>
         </div>
 
-        {/* Team cards - carousel */}
+        {/* Team cards */}
         <div className='relative'>
           <div className='flex gap-8 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide'>
-            {team.map(member => (
+            {team.map((member, index) => (
               <div
                 key={member.name}
-                className='shrink-0 w-105 snap-start rounded-2xl overflow-hidden bg-[#F1EDFB]'>
-                {/* Purple header block */}
+                className={`shrink-0 w-105 snap-start rounded-2xl overflow-hidden bg-[#F1EDFB] anim-hidden anim-fade-up ${visible} anim-delay-${Math.min(
+                  index + 4,
+                  10,
+                )}`}>
+                {/* Purple header */}
                 <div className='h-24 bg-linear-to-r from-[#3B1A9C] to-[#5B21B6] relative'>
                   <div className='absolute left-1/2 -bottom-20 -translate-x-1/2'>
                     <div className='w-35 h-35 rounded-full bg-white p-1.5 overflow-hidden'>
@@ -90,9 +107,11 @@ function TeamSection() {
                   <h3 className='font-inter font-bold text-xl text-[#0B0B2B] mb-1'>
                     {member.name}
                   </h3>
+
                   <p className='font-inter font-semibold text-[#7C3AED] mb-4'>
                     {member.role}
                   </p>
+
                   <p className='font-inter text-gray-600 text-sm leading-relaxed'>
                     {member.description}
                   </p>
