@@ -80,10 +80,7 @@ function HowWeWork() {
         </div>
 
         {/* Steps — vertical on mobile, horizontal on lg+ */}
-        <div
-          ref={stepsRef}
-          className='mt-10 sm:mt-14 md:mt-20 relative'>
-
+        <div ref={stepsRef} className='mt-10 sm:mt-14 md:mt-20 relative'>
           {/* Desktop: horizontal layout with connector (lg+) */}
           <div className='hidden lg:flex items-start justify-between relative'>
             {/* Dotted connector line */}
@@ -124,7 +121,8 @@ function HowWeWork() {
                   <span
                     className='font-medium text-[32px] leading-[26px]'
                     style={{
-                      color: step.badgeColor === "purple" ? "#FFFFFF" : "#020A23",
+                      color:
+                        step.badgeColor === "purple" ? "#FFFFFF" : "#020A23",
                     }}>
                     {step.number}
                   </span>
@@ -147,9 +145,7 @@ function HowWeWork() {
               style={{
                 backgroundImage:
                   "repeating-linear-gradient(to bottom, #2221238c 0px, #87848b 6px, transparent 10px, transparent 16px)",
-                animation: stepsInView
-                  ? "fadeIn 0.8s ease 0.2s both"
-                  : "none",
+                animation: stepsInView ? "fadeIn 0.8s ease 0.2s both" : "none",
               }}
             />
 
@@ -177,7 +173,8 @@ function HowWeWork() {
                   <span
                     className='font-medium text-[24px] sm:text-[28px] leading-[26px]'
                     style={{
-                      color: step.badgeColor === "purple" ? "#FFFFFF" : "#020A23",
+                      color:
+                        step.badgeColor === "purple" ? "#FFFFFF" : "#020A23",
                     }}>
                     {step.number}
                   </span>
