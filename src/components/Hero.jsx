@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import playBtn from "../assets/Play button.png";
+import { useNavigate } from "react-router-dom";
 
 const stats = [
   {
@@ -22,7 +23,10 @@ const stats = [
   {
     value: (
       <>
-        1<span className='text-[#7C3AED] text-[20px] sm:text-[28px] align-top'>st</span>
+        1
+        <span className='text-[#7C3AED] text-[20px] sm:text-[28px] align-top'>
+          st
+        </span>
       </>
     ),
     label: "Step: Your Idea",
@@ -30,6 +34,7 @@ const stats = [
 ];
 
 function Hero() {
+  const navigate = useNavigate();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -97,14 +102,15 @@ function Hero() {
             : "none",
         }}>
         <button
-          className='w-full sm:w-[220px] md:w-[240px] h-[52px] sm:h-[56px] md:h-[60px] rounded-[15px] text-white text-[18px] sm:text-[20px] font-bold transition-all duration-300 hover:scale-[1.02] hover:shadow-lg'
+          onClick={() => navigate("/start-a-project")}
+          className='w-full sm:w-[220px] md:w-[240px] h-[52px] sm:h-[56px] md:h-[60px] rounded-[15px] text-white text-[18px] sm:text-[20px] font-bold transition-all duration-300 hover:scale-[1.02] hover:shadow-lg cursor-pointer'
           style={{
             background: "linear-gradient(95.25deg,#472187 3%,#7C3AED 100%)",
           }}>
           Start a Project
         </button>
 
-        <button className='w-full sm:w-[220px] md:w-[240px] h-[52px] sm:h-[56px] md:h-[60px] rounded-[15px] border-2 border-[#87848B] flex items-center justify-center gap-3 text-[18px] sm:text-[20px] font-semibold text-[#150734] transition-all duration-300 hover:bg-white/30'>
+        <button className='w-full sm:w-[220px] md:w-[240px] h-[52px] sm:h-[56px] md:h-[60px] rounded-[15px] border-2 border-[#87848B] flex items-center justify-center gap-3 text-[18px] sm:text-[20px] font-semibold text-[#150734] transition-all duration-300 hover:bg-white/30 cursor-pointer'>
           <img src={playBtn} alt='Play' className='w-4 h-4 sm:w-5 sm:h-5' />
           Watch Our Story
         </button>

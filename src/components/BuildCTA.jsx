@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import useInView from "../hooks/useInView";
 
 function BuildCTA() {
+  const navigate = useNavigate();
   const [ctaRef, ctaInView] = useInView({ threshold: 0.15 });
 
   return (
@@ -44,7 +46,8 @@ function BuildCTA() {
                 : "none",
             }}>
             <button
-              className='flex items-center gap-[15px] rounded-[15px] px-[20px] py-[10px] font-semibold text-[18px] sm:text-[20px] transition-all duration-300 hover:scale-[1.03] hover:shadow-lg w-full sm:w-auto'
+              onClick={() => navigate("/start-a-project")}
+              className='flex items-center gap-[15px] rounded-[15px] px-[20px] py-[10px] font-semibold text-[18px] sm:text-[20px] transition-all duration-300 hover:scale-[1.03] hover:shadow-lg cursor-pointer w-full sm:w-auto'
               style={{
                 background: "#FFC77A",
                 color: "#020A23",
