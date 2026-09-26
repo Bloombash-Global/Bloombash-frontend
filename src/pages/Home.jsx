@@ -4,6 +4,7 @@ import CoreValues from "../components/CoreValues";
 import Industries from "../components/Industries";
 import HowWeWork from "../components/HowWeWork";
 import BuildCTA from "../components/BuildCTA";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Industries />
       <HowWeWork />
       <BuildCTA />
+      <Footer />
     </>
   );
 }

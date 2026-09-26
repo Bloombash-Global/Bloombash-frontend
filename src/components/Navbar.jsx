@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/Bloombash Logo.png";
 
 const navLinks = [
-  { label: "Services", type: "route", target: "services" },
+  { label: "Services", type: "scroll", target: "services" },
   { label: "AboutUs", type: "route", target: "/about" },
   { label: "Industries", type: "scroll", target: "industries" },
   { label: "Values", type: "scroll", target: "values" },
@@ -41,9 +41,14 @@ function Navbar() {
     setMenuOpen(false);
   };
 
+  const handleGetStarted = () => {
+    navigate("/start-a-project");
+    setMenuOpen(false);
+  };
+
   return (
-    <nav className='w-full bg-white relative z-50'>
-      <div className='flex items-center justify-between mx-auto max-w-312 h-[60px] md:h-[80px] mt-3 md:mt-5 px-4 sm:px-6'>
+    <nav className='w-full bg-[#EAEAF880] relative z-50 top-0 p-2'>
+      <div className='flex items-center justify-between mx-auto max-w-312 h-[60px] md:h-[80px]   px-4 sm:px-6'>
         {/* Logo */}
         <img
           src={logo}
@@ -75,6 +80,7 @@ function Navbar() {
 
         {/* CTA Button — desktop */}
         <button
+          onClick={handleGetStarted}
           className={`hidden lg:block w-[160px] xl:w-[180px] h-[50px] xl:h-[60px] rounded-[15px] text-white font-semibold text-base xl:text-[18px] cursor-pointer hover:opacity-90 transition-opacity ${mounted ? "anim-visible" : "anim-hidden"}`}
           style={{
             background: "linear-gradient(95.25deg, #472187 3%, #7C3AED 100%)",
@@ -123,6 +129,7 @@ function Navbar() {
         </ul>
 
         <button
+          onClick={handleGetStarted}
           className='mt-8 w-full h-[55px] rounded-[15px] text-white font-semibold text-[18px] cursor-pointer hover:opacity-90 transition-opacity'
           style={{
             background: "linear-gradient(95.25deg, #472187 3%, #7C3AED 100%)",
