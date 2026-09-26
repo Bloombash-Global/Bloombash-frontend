@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "../lib/supabase";
 
 function ContactForm() {
   const [formData, setFormData] = useState({
@@ -25,15 +26,34 @@ function ContactForm() {
     setSubmitError(false);
 
     try {
-      // TODO (Ticket 2): replace with
-      // const { error } = await supabase.from("contact_messages").insert([{
-      //   name: formData.name,
-      //   email: formData.email,
-      //   subject: formData.subject,
-      //   message: formData.message,
-      // }]);
+      const { error } = await supabase
+        .from("contact_messages")
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+          },
+        ]);
 
-      await new Promise(res => setTimeout(res, 800)); // placeholder delay
+      if (error) {
+        console.error("Submission failed:", error);
+        console.error("Error message:", error.message);
+        console.error("Error status:", error.status);
+        console.error("Error details:", error.details);
+        console.error("Error hint:", error.hint);
+
+        setSubmitError(true);
+
+        setTimeout(() => {
+          setSubmitError(false);
+        }, 5000);
+
+        return;
+      }
+
+      console.log("Contact message submitted successfully");
 
       setSubmitted(true);
 
@@ -137,7 +157,7 @@ function ContactForm() {
         <button
           type='submit'
           disabled={submitting}
-          className='cursor-pointer w-full bg-[#7C3AED] hover:bg-[#6D28D9] disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-4 rounded-xl transition-colors'>
+          className='cursor-pointer w-full bg-purple-600 hover:bg-purple-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-4 rounded-xl transition-colors'>
           {submitting ? "Sending..." : "Get Started"}
         </button>
       </form>
