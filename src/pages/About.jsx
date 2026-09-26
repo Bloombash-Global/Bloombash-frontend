@@ -1,0 +1,16 @@
+import AboutHero from "../components/AboutHero";
+import MissionValues from "../components/MissionValues";
+import AboutCTA from "../components/AboutCTA";
+import TeamSection from "../components/TeamSection";
+
+export default function About() {
+  return (
+    <>
+      {/* <Navbar /> */}
+      <AboutHero />
+      <MissionValues />
+      <TeamSection />
+      <AboutCTA />
+    </>
+  );
+}

@@ -1,3 +1,4 @@
+import useInView from "../hooks/useInView";
 import innovationIcon from "../assets/Innovation.png";
 import inclusivityIcon from "../assets/Inclusivity.png";
 import integrityIcon from "../assets/Integrity.png";
@@ -38,43 +39,66 @@ const values = [
 ];
 
 function CoreValues() {
+  const [headerRef, headerInView] = useInView({ threshold: 0.2 });
+  const [cardsRef, cardsInView] = useInView({ threshold: 0.1 });
+
   return (
-    <section className='w-full bg-[#EAEAF8] py-[90px]'>
-      <div className='max-w-[1330px] mx-auto px-6'>
+    <section className='w-full bg-[#EAEAF8] py-12 sm:py-16 md:py-[90px]'>
+      <div className='max-w-[1330px] mx-auto px-4 sm:px-6'>
         {/* Header */}
-        <div className='flex flex-col items-center'>
+        <div ref={headerRef} className='flex flex-col items-center'>
           {/* Badge */}
-          <div className='flex items-center gap-[11px] rounded-[20px] border border-[#87848B] bg-[#7C3AED1A] px-4 py-[10px]'>
-            <span className='w-2 h-2 rounded-full bg-[#7C3AED]' />
-            <span className='uppercase text-[15px] font-extrabold tracking-[1px] text-[#420C9F]'>
+          <div
+            className={`flex items-center gap-2 sm:gap-[11px] rounded-[20px] border border-[#87848B] bg-[#7C3AED1A] px-3 sm:px-4 py-2 sm:py-[10px] ${headerInView ? "anim-visible" : "anim-hidden"}`}
+            style={{
+              animation: headerInView
+                ? "scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) 0.1s both"
+                : "none",
+            }}>
+            <span className='w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#7C3AED]' />
+            <span className='uppercase text-[12px] sm:text-[14px] md:text-[15px] font-extrabold tracking-[1px] text-[#420C9F]'>
               Our Foundation
             </span>
           </div>
 
           {/* Heading */}
-          <h2 className='mt-8 text-center text-[48px] leading-[58px] font-bold text-[#020A23]'>
+          <h2
+            className={`mt-5 sm:mt-6 md:mt-8 text-center text-[28px] sm:text-[36px] md:text-[44px] lg:text-[48px] leading-[36px] sm:leading-[46px] md:leading-[58px] font-bold text-[#020A23] ${headerInView ? "anim-visible" : "anim-hidden"}`}
+            style={{
+              animation: headerInView
+                ? "fadeInUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s both"
+                : "none",
+            }}>
             Built on <span className='text-[#7C3AED]'>Core Values</span>
           </h2>
 
           {/* Description */}
-          <p className='mt-5 max-w-[580px] text-center text-[18px] leading-[32px] font-medium text-[#020A23CC]'>
+          <p
+            className={`mt-3 sm:mt-4 md:mt-5 max-w-[580px] text-center text-[15px] sm:text-[17px] md:text-[18px] leading-[26px] sm:leading-[30px] md:leading-[32px] font-medium text-[#020A23CC] ${headerInView ? "anim-visible" : "anim-hidden"}`}
+            style={{
+              animation: headerInView
+                ? "fadeInUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.35s both"
+                : "none",
+            }}>
             These aren't just words on a wall, they define every line of code we
             write and every client we serve.
           </p>
         </div>
 
         {/* Cards */}
-        <div className='mt-16 grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-5'>
-          {values.map(value => (
+        <div
+          ref={cardsRef}
+          className='mt-10 sm:mt-12 md:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-5'>
+          {values.map((value, index) => (
             <div
               key={value.title}
-              className='
+              className={`
                 bg-white
                 rounded-[10px]
                 border
                 border-[#87848B4D]
-                p-5
-                min-h-[250px]
+                p-4 sm:p-5
+                min-h-[200px] sm:min-h-[230px] md:min-h-[250px]
                 flex
                 flex-col
                 items-center
@@ -83,21 +107,27 @@ function CoreValues() {
                 duration-300
                 hover:-translate-y-1
                 hover:shadow-xl
-              '>
+                ${cardsInView ? "anim-visible" : "anim-hidden"}
+              `}
+              style={{
+                animation: cardsInView
+                  ? `fadeInUp 0.6s cubic-bezier(0.22,1,0.36,1) ${index * 0.1}s both`
+                  : "none",
+              }}>
               {/* Icon */}
               <img
                 src={value.icon}
                 alt={value.title}
-                className='w-[30px] h-[36px] object-contain'
+                className='w-[26px] h-[32px] sm:w-[30px] sm:h-[36px] object-contain'
               />
 
               {/* Title */}
-              <h3 className='mt-6 text-[16px] leading-[26px] font-bold text-[#020A23]'>
+              <h3 className='mt-4 sm:mt-6 text-[14px] sm:text-[16px] leading-[22px] sm:leading-[26px] font-bold text-[#020A23]'>
                 {value.title}
               </h3>
 
               {/* Description */}
-              <p className='mt-4 text-[14px] leading-[26px] font-semibold text-[#605F62]'>
+              <p className='mt-2 sm:mt-4 text-[13px] sm:text-[14px] leading-[22px] sm:leading-[26px] font-semibold text-[#605F62]'>
                 {value.description}
               </p>
             </div>
