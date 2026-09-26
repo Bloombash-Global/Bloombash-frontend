@@ -10,9 +10,7 @@ function Footer2() {
   const visible = isInView ? "anim-visible" : "";
 
   return (
-    <footer
-      ref={sectionRef}
-      className='w-full bg-[#0B0B2B] py-8 px-6 sm:px-16'>
+    <footer ref={sectionRef} className='w-full bg-[#0B0B2B] py-8 px-6 sm:px-16'>
       <div className='max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 flex-wrap'>
         <p
           className={`font-inter text-sm text-white/70 text-center sm:text-left flex items-center gap-1.5 anim-hidden anim-fade-up ${visible}`}>
