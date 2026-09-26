@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { supabase } from "../lib/supabase";
+import useInView from "../hooks/useInView";
 
 function ContactForm() {
+  const [sectionRef, isInView] = useInView({
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px",
+  });
+  const visible = isInView ? "anim-visible" : "";
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -76,12 +83,16 @@ function ContactForm() {
   };
 
   return (
-    <div className='bg-gray-100 rounded-2xl px-6 py-5 md:p-10 border-gray-100'>
-      <h2 className='text-3xl font-bold text-gray-900 mb-2'>
+    <div
+      ref={sectionRef}
+      className='bg-gray-100 rounded-2xl px-6 py-5 md:p-10 border-gray-100'>
+      <h2
+        className={`text-3xl font-bold text-gray-900 mb-2 anim-hidden anim-fade-down ${visible}`}>
         Send us a message
       </h2>
 
-      <p className='text-gray-600 mb-8'>
+      <p
+        className={`text-gray-600 mb-8 anim-hidden anim-fade-up ${visible} anim-delay-2`}>
         Fill out the form below and our team will get back to you.
       </p>
 
@@ -97,7 +108,9 @@ function ContactForm() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className='space-y-6'>
+      <form
+        onSubmit={handleSubmit}
+        className={`space-y-6 anim-hidden anim-fade-up ${visible} anim-delay-3`}>
         <div>
           <label className='block text-sm font-semibold text-gray-900 mb-2'>
             Name
