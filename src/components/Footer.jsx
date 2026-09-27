@@ -49,7 +49,7 @@ function Footer() {
   const [bottomRef, bottomInView] = useInView({ threshold: 0.2 });
 
   return (
-    <footer className='bg-[#0E152C] text-white pt-12 sm:pt-16 md:pt-20 pb-6 sm:pb-8'>
+    <footer className='bg-[#0E152C] text-white pt-12 sm:pt-16 md:pt-20 pb-6 sm:pb-8 overflow-x-hidden'>
       <div className='max-w-[1245px] mx-auto px-4 sm:px-6'>
         {/* Top Footer */}
         <div className='flex flex-col lg:flex-row justify-between gap-10 sm:gap-12 lg:gap-16'>
@@ -101,7 +101,7 @@ function Footer() {
           {/* Links */}
           <div
             ref={linksRef}
-            className='grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-10 lg:gap-[86px]'>
+            className='grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-10 lg:gap-[86px]'>
             {footerSections.map((section, sectionIndex) => (
               <div
                 key={section.title}
@@ -119,10 +119,10 @@ function Footer() {
                   {section.links.map((link, linkIndex) => (
                     <li
                       key={link}
-                      className={`text-[13px] sm:text-[14px] leading-[26px] sm:leading-[30px] text-white/80 hover:text-white cursor-pointer transition-colors ${linksInView ? "anim-visible" : "anim-hidden"}`}
+                      className={`text-[12px] sm:text-[14px] leading-[26px] sm:leading-[30px] text-white/80 hover:text-white cursor-pointer transition-colors ${linksInView ? "anim-visible" : "anim-hidden"}`}
                       style={{
                         animation: linksInView
-                          ? `fadeIn 0.5s ease ${(sectionIndex * 0.1) + (linkIndex * 0.05) + 0.15}s both`
+                          ? `fadeIn 0.5s ease ${sectionIndex * 0.1 + linkIndex * 0.05 + 0.15}s both`
                           : "none",
                       }}>
                       {link}
