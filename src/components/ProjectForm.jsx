@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import Dropdown from "../components/Dropdown";
 import { supabase } from "../lib/supabase";
 import useInView from "../hooks/useInView";
 
 function ProjectForm() {
+  const location = useLocation();
+  const incomingBuildType = location.state?.buildType;
+
   const [sectionRef, isInView] = useInView({
     threshold: 0.15,
     rootMargin: "0px 0px -50px 0px",
@@ -14,7 +18,7 @@ function ProjectForm() {
     firstName: "",
     lastName: "",
     workEmail: "",
-    buildType: "Custom Software/Web App",
+    buildType: incomingBuildType || "Custom Software/Web App",
     projectDetails: "",
   });
 
@@ -90,6 +94,11 @@ function ProjectForm() {
       setSubmitting(false);
     }
   };
+  const isFormValid =
+    formData.firstName.trim()
+    && formData.lastName.trim()
+    && formData.workEmail.trim()
+    && formData.projectDetails.trim();
 
   return (
     <div
@@ -189,7 +198,7 @@ function ProjectForm() {
 
         <button
           type='submit'
-          disabled={submitting}
+          disabled={submitting || !isFormValid}
           className='cursor-pointer w-full bg-purple-600 hover:bg-purple-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-4 rounded-xl transition-colors'>
           {submitting ? "Submitting..." : "Submit Project Request"}
         </button>

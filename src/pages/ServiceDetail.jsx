@@ -102,4 +102,5 @@ function CardGrid({ heading, items }) {
     </div>
   );
 }
+
 export default ServiceDetail;
