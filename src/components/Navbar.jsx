@@ -81,7 +81,7 @@ function Navbar() {
         {/* CTA Button — desktop */}
         <button
           onClick={handleGetStarted}
-          className={`hidden lg:block w-[160px] xl:w-[180px] h-[50px] xl:h-[60px] rounded-[15px] text-white font-semibold text-base xl:text-[18px] cursor-pointer hover:opacity-90 transition-opacity ${mounted ? "anim-visible" : "anim-hidden"}`}
+          className={`hidden lg:block px-4 py-2.5  rounded-[15px] text-white font-semibold text-base xl:text-[18px] cursor-pointer hover:opacity-90 transition-opacity ${mounted ? "anim-visible" : "anim-hidden"}`}
           style={{
             background: "linear-gradient(95.25deg, #472187 3%, #7C3AED 100%)",
             animation: mounted
