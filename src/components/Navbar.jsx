@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/Bloombash Logo.png";
 
@@ -13,13 +13,53 @@ const navLinks = [
 function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const observerRef = useRef(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setMounted(true), 50);
     return () => clearTimeout(timer);
   }, []);
+
+  // Track which scroll-section is currently in view (only matters on "/")
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      setActiveSection("");
+      return;
+    }
+
+    const scrollTargets = navLinks
+      .filter(link => link.type === "scroll")
+      .map(link => link.target);
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: 0 },
+    );
+
+    scrollTargets.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    observerRef.current = observer;
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  const isLinkActive = link => {
+    if (link.type === "route") {
+      return location.pathname === link.target;
+    }
+    return location.pathname === "/" && activeSection === link.target;
+  };
 
   const handleNavClick = link => {
     if (link.type === "scroll") {
@@ -48,7 +88,7 @@ function Navbar() {
 
   return (
     <nav className='w-full bg-[#EAEAF880] relative z-50 top-0 p-2'>
-      <div className='flex items-center justify-between mx-auto max-w-312 h-[60px] md:h-[80px]   px-4 sm:px-6'>
+      <div className='flex items-center justify-between mx-auto max-w-312 h-[60px] md:h-[80px] px-4 sm:px-6'>
         {/* Logo */}
         <img
           src={logo}
@@ -67,7 +107,11 @@ function Navbar() {
             <li
               key={link.label}
               onClick={() => handleNavClick(link)}
-              className={`cursor-pointer font-semibold text-base xl:text-[18px] text-[#020A23] leading-none font-inter hover:text-purple-700 transition-colors ${mounted ? "anim-visible" : "anim-hidden"}`}
+              className={`cursor-pointer font-semibold text-base xl:text-[18px] leading-none font-inter transition-colors ${
+                isLinkActive(link)
+                  ? "text-purple-700"
+                  : "text-[#020A23] hover:text-purple-700"
+              } ${mounted ? "anim-visible" : "anim-hidden"}`}
               style={{
                 animation: mounted
                   ? `fadeInDown 0.6s cubic-bezier(0.22,1,0.36,1) ${0.1 + index * 0.08}s both`
@@ -81,7 +125,7 @@ function Navbar() {
         {/* CTA Button — desktop */}
         <button
           onClick={handleGetStarted}
-          className={`hidden lg:block px-4 py-2.5  rounded-[15px] text-white font-semibold text-base xl:text-[18px] cursor-pointer hover:opacity-90 transition-opacity ${mounted ? "anim-visible" : "anim-hidden"}`}
+          className={`hidden lg:block px-4 py-2.5 rounded-[15px] text-white font-semibold text-base xl:text-[18px] cursor-pointer hover:opacity-90 transition-opacity ${mounted ? "anim-visible" : "anim-hidden"}`}
           style={{
             background: "linear-gradient(95.25deg, #472187 3%, #7C3AED 100%)",
             animation: mounted
@@ -121,7 +165,11 @@ function Navbar() {
           {navLinks.map(link => (
             <li
               key={link.label}
-              className='cursor-pointer font-semibold text-[18px] text-[#020A23] py-3 border-b border-gray-100 hover:text-purple-700 transition-colors'
+              className={`cursor-pointer font-semibold text-[18px] py-3 border-b border-gray-100 transition-colors ${
+                isLinkActive(link)
+                  ? "text-purple-700"
+                  : "text-[#020A23] hover:text-purple-700"
+              }`}
               onClick={() => handleNavClick(link)}>
               {link.label}
             </li>
@@ -130,7 +178,7 @@ function Navbar() {
 
         <button
           onClick={handleGetStarted}
-          className='mt-8 w-full h-[55px] rounded-[15px] text-white font-semibold text-[18px] cursor-pointer hover:opacity-90 transition-opacity'
+          className='mt-8 w-full px-4 py-3 rounded-[15px] text-white font-semibold text-[18px] cursor-pointer hover:opacity-90 transition-opacity'
           style={{
             background: "linear-gradient(95.25deg, #472187 3%, #7C3AED 100%)",
           }}>
@@ -142,3 +190,4 @@ function Navbar() {
 }
 
 export default Navbar;
+g;

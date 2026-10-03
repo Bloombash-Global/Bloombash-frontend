@@ -43,7 +43,9 @@ function CoreValues() {
   const [cardsRef, cardsInView] = useInView({ threshold: 0.1 });
 
   return (
-    <section className='w-full bg-[#EAEAF8] py-12 sm:py-16 md:py-[90px]'>
+    <section
+      id='values'
+      className='w-full bg-[#EAEAF8] py-12 sm:py-16 md:py-[90px]'>
       <div className='max-w-[1330px] mx-auto px-4 sm:px-6'>
         {/* Header */}
         <div ref={headerRef} className='flex flex-col items-center'>
