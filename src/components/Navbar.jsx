@@ -48,7 +48,7 @@ function Navbar() {
 
   return (
     <nav className='w-full bg-[#EAEAF880] relative z-50 top-0 p-2'>
-      <div className='flex items-center justify-between mx-auto max-w-312 h-[60px] md:h-[80px]   px-4 sm:px-6'>
+      <div className='flex items-center justify-between mx-auto max-w-312 h-15 md:h-20 px-4 sm:px-6'>
         {/* Logo */}
         <img
           src={logo}
@@ -62,12 +62,16 @@ function Navbar() {
         />
 
         {/* Nav Links — desktop */}
-        <ul className='hidden lg:flex items-center gap-8 xl:gap-[54px]'>
+        <ul className='hidden lg:flex items-center gap-8 xl:gap-13'>
           {navLinks.map((link, index) => (
             <li
               key={link.label}
               onClick={() => handleNavClick(link)}
-              className={`cursor-pointer font-semibold text-base xl:text-[18px] text-[#020A23] leading-none font-inter hover:text-purple-700 transition-colors ${mounted ? "anim-visible" : "anim-hidden"}`}
+              className={`cursor-pointer font-semibold text-base xl:text-lg leading-none font-inter transition-colors ${
+                isLinkActive(link)
+                  ? "text-purple-700"
+                  : "text-[#020A23] hover:text-purple-700"
+              } ${mounted ? "anim-visible" : "anim-hidden"}`}
               style={{
                 animation: mounted
                   ? `fadeInDown 0.6s cubic-bezier(0.22,1,0.36,1) ${0.1 + index * 0.08}s both`
@@ -81,7 +85,7 @@ function Navbar() {
         {/* CTA Button — desktop */}
         <button
           onClick={handleGetStarted}
-          className={`hidden lg:block w-[160px] xl:w-[180px] h-[50px] xl:h-[60px] rounded-[15px] text-white font-semibold text-base xl:text-[18px] cursor-pointer hover:opacity-90 transition-opacity ${mounted ? "anim-visible" : "anim-hidden"}`}
+          className={`hidden lg:block px-4 py-2.5 rounded-2xl text-white font-semibold text-base xl:text-lg cursor-pointer hover:opacity-90 transition-opacity ${mounted ? "anim-visible" : "anim-hidden"}`}
           style={{
             background: "linear-gradient(95.25deg, #472187 3%, #7C3AED 100%)",
             animation: mounted
@@ -93,17 +97,17 @@ function Navbar() {
 
         {/* Hamburger — mobile/tablet */}
         <button
-          className='lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-[5px] cursor-pointer z-50'
+          className='lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.25 cursor-pointer z-50'
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label='Toggle menu'>
           <span
-            className={`block w-6 h-[2.5px] bg-[#020A23] rounded transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7.5px]" : ""}`}
+            className={`block w-6 h-0.5 bg-[#020A23] rounded transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
           />
           <span
-            className={`block w-6 h-[2.5px] bg-[#020A23] rounded transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`}
+            className={`block w-6 h-0.5 bg-[#020A23] rounded transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`}
           />
           <span
-            className={`block w-6 h-[2.5px] bg-[#020A23] rounded transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7.5px]" : ""}`}
+            className={`block w-6 h-0.5 bg-[#020A23] rounded transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
           />
         </button>
       </div>
@@ -116,12 +120,16 @@ function Navbar() {
 
       {/* Mobile menu panel */}
       <div
-        className={`lg:hidden fixed top-0 right-0 h-full w-[280px] sm:w-[320px] bg-white shadow-2xl z-40 flex flex-col pt-24 pb-8 px-6 transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
+        className={`lg:hidden fixed top-0 right-0 h-full w-70 sm:w-80 bg-white shadow-2xl z-40 flex flex-col pt-24 pb-8 px-6 transition-transform duration-300 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
         <ul className='flex flex-col gap-2'>
           {navLinks.map(link => (
             <li
               key={link.label}
-              className='cursor-pointer font-semibold text-[18px] text-[#020A23] py-3 border-b border-gray-100 hover:text-purple-700 transition-colors'
+              className={`cursor-pointer font-semibold text-lg py-3 border-b border-gray-100 transition-colors ${
+                isLinkActive(link)
+                  ? "text-purple-700"
+                  : "text-[#020A23] hover:text-purple-700"
+              }`}
               onClick={() => handleNavClick(link)}>
               {link.label}
             </li>
@@ -130,7 +138,7 @@ function Navbar() {
 
         <button
           onClick={handleGetStarted}
-          className='mt-8 w-full h-[55px] rounded-[15px] text-white font-semibold text-[18px] cursor-pointer hover:opacity-90 transition-opacity'
+          className='mt-8 w-full px-4 py-3 rounded-2xl text-white font-semibold text-lg cursor-pointer hover:opacity-90 transition-opacity'
           style={{
             background: "linear-gradient(95.25deg, #472187 3%, #7C3AED 100%)",
           }}>
