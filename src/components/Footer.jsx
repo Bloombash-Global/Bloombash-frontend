@@ -37,10 +37,18 @@ const footerSections = [
 ];
 
 const socialIcons = [
-  { icon: twitter, alt: "Twitter" },
-  { icon: linkedin, alt: "LinkedIn" },
-  { icon: instagram, alt: "Instagram" },
-  { icon: email, alt: "Email" },
+  { icon: twitter, alt: "X", url: "https://x.com/bloombashglobal" },
+  {
+    icon: linkedin,
+    alt: "LinkedIn",
+    url: "https://www.linkedin.com/company/bloombash",
+  },
+  {
+    icon: instagram,
+    alt: "Instagram",
+    url: "https://www.instagram.com/bloombash_global",
+  },
+  { icon: email, alt: "Email", url: "mailto:hello@bloombashglobal.com" },
 ];
 
 function Footer() {
@@ -79,21 +87,30 @@ function Footer() {
 
             {/* Social Icons */}
             <div className='flex gap-3 sm:gap-4 mt-5 sm:mt-6'>
-              {socialIcons.map((social, index) => (
-                <div
-                  key={social.alt}
-                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-[10px] border border-[#87848B] bg-white/10 flex items-center justify-center cursor-pointer hover:bg-purple-600 transition-colors duration-300 ${brandInView ? "anim-visible" : "anim-hidden"}`}
-                  style={{
-                    animation: brandInView
-                      ? `scaleIn 0.5s cubic-bezier(0.22,1,0.36,1) ${0.3 + index * 0.08}s both`
-                      : "none",
-                  }}>
+               {socialIcons.map((social, index) => (
+    <a
+      key={social.alt}
+      href={social.url}
+      target='_blank'
+      rel='noopener noreferrer'
+      aria-label={social.alt}
+      className={`w-9 h-9 sm:w-10 sm:h-10 rounded-[10px] border border-[#87848B] bg-white/10 flex items-center justify-center cursor-pointer hover:bg-purple-600 transition-colors duration-300 ${
+        brandInView ? "anim-visible" : "anim-hidden"
+      }`}
+      style={{
+        animation: brandInView
+          ? `scaleIn 0.5s cubic-bezier(0.22,1,0.36,1) ${
+              0.3 + index * 0.08
+            }s both`
+          : "none",
+      }}>
+
                   <img
                     src={social.icon}
                     alt={social.alt}
                     className='w-[16px] h-[16px] sm:w-[18px] sm:h-[18px]'
                   />
-                </div>
+                </a>
               ))}
             </div>
           </div>
