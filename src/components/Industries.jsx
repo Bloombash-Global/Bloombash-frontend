@@ -20,7 +20,9 @@ function Industries() {
   const [pillsRef, pillsInView] = useInView({ threshold: 0.15 });
 
   return (
-    <section className='w-full bg-[#EAEAF8] py-12 sm:py-14 md:py-[68px]'>
+    <section
+      id='industries'
+      className='w-full bg-[#EAEAF8] py-12 sm:py-14 md:py-[68px]'>
       <div className='max-w-[1071px] mx-auto px-4 sm:px-6'>
         {/* Header */}
         <div ref={headerRef} className='flex flex-col items-center'>

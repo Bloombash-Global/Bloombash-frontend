@@ -58,7 +58,9 @@ function WhatWeBuild() {
   const [cardsRef, cardsInView] = useInView({ threshold: 0.1 });
 
   return (
-    <section className='w-full bg-[#EAEAF8] py-12 sm:py-14 md:py-[69px]'>
+    <section
+      id='services'
+      className='w-full bg-[#EAEAF8] py-12 sm:py-14 md:py-[69px]'>
       <div className='max-w-[1260px] mx-auto px-4 sm:px-6'>
         {/* Header */}
         <div ref={headerRef} className='flex flex-col items-center'>
