@@ -12,7 +12,7 @@ const services = [
   {
     icon: "🤖",
     slug: "ai-solutions",
-    title: "AI Powered Solutions",
+    title: "AI Powered Solutions & Automation",
     description:
       "Intelligent systems and automation tools that streamline operations and unlock new possibilities for your business.",
   },
@@ -58,13 +58,15 @@ function WhatWeBuild() {
   const [cardsRef, cardsInView] = useInView({ threshold: 0.1 });
 
   return (
-    <section className='w-full bg-[#EAEAF8] py-12 sm:py-14 md:py-[69px]'>
-      <div className='max-w-[1260px] mx-auto px-4 sm:px-6'>
+    <section
+      id='services'
+      className='w-full bg-[#EAEAF8] py-12 sm:py-14 md:py-17.25'>
+      <div className='max-w-315 mx-auto px-4 sm:px-6'>
         {/* Header */}
         <div ref={headerRef} className='flex flex-col items-center'>
           {/* Badge */}
           <div
-            className={`flex items-center gap-2 sm:gap-[11px] rounded-[20px] border border-[#87848B] bg-[#7C3AED1A] px-3 sm:px-4 py-2 sm:py-[10px] ${headerInView ? "anim-visible" : "anim-hidden"}`}
+            className={`flex items-center gap-2 sm:gap-2.75 rounded-[20px] border border-[#87848B] bg-[#7C3AED1A] px-3 sm:px-4 py-2 sm:py-2.5 ${headerInView ? "anim-visible" : "anim-hidden"}`}
             style={{
               animation: headerInView
                 ? "scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) 0.1s both"
@@ -78,7 +80,7 @@ function WhatWeBuild() {
           </div>
 
           <h2
-            className={`mt-5 sm:mt-6 md:mt-8 text-center text-[28px] sm:text-[36px] md:text-[44px] lg:text-[48px] leading-[36px] sm:leading-[46px] md:leading-[58px] font-bold text-[#020A23] ${headerInView ? "anim-visible" : "anim-hidden"}`}
+            className={`mt-5 sm:mt-6 md:mt-8 text-center text-[28px] sm:text-[36px] md:text-[44px] lg:text-[48px] leading-9 sm:leading-11.5 md:leading-14.5 font-bold text-[#020A23] ${headerInView ? "anim-visible" : "anim-hidden"}`}
             style={{
               animation: headerInView
                 ? "fadeInUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s both"
@@ -89,7 +91,7 @@ function WhatWeBuild() {
           </h2>
 
           <p
-            className={`mt-3 sm:mt-4 md:mt-5 max-w-[524px] text-center text-[15px] sm:text-[17px] md:text-[18px] leading-[26px] sm:leading-[30px] md:leading-[32px] font-medium text-[#020A23CC] ${headerInView ? "anim-visible" : "anim-hidden"}`}
+            className={`mt-3 sm:mt-4 md:mt-5 max-w-131 text-center text-[15px] sm:text-[17px] md:text-[18px] leading-6.5 sm:leading-7.5 md:leading-8 font-medium text-[#020A23CC] ${headerInView ? "anim-visible" : "anim-hidden"}`}
             style={{
               animation: headerInView
                 ? "fadeInUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.35s both"
@@ -112,7 +114,7 @@ function WhatWeBuild() {
                 border
                 border-[#87848B4D]
                 p-4 sm:p-5
-                min-h-[250px] sm:min-h-[280px] md:min-h-[305px]
+                min-h-62.5 sm:min-h-70 md:min-h-76.25
                 flex
                 flex-col
                 transition-all
@@ -127,21 +129,21 @@ function WhatWeBuild() {
                   : "none",
               }}>
               <div className='flex items-left justify-between flex-col'>
-                <div className='w-[46px] h-[46px] sm:w-[50px] sm:h-[50px] rounded-[10px] bg-[#F5F5F5] flex items-center justify-between text-xl sm:text-2xl'>
+                <div className='w-11.5 h-11.5 sm:w-12.5 sm:h-12.5 rounded-[10px] bg-[#F5F5F5] flex items-center justify-between text-xl sm:text-2xl'>
                   {service.icon}
                 </div>
 
-                <h3 className='mt-4 sm:mt-6 text-[16px] sm:text-[18px] leading-[26px] sm:leading-[30px] font-bold text-[#020A23]'>
+                <h3 className='mt-4 sm:mt-6 text-[16px] sm:text-[18px] leading-6.5 sm:leading-7.5 font-bold text-[#020A23]'>
                   {service.title}
                 </h3>
 
-                <p className='mt-2 sm:mt-3 text-[14px] sm:text-[16px] leading-[24px] sm:leading-[30px] font-medium text-[#605F62]'>
+                <p className='mt-2 sm:mt-3 text-[14px] sm:text-[16px] leading-6 sm:leading-7.5 font-medium text-[#605F62]'>
                   {service.description}
                 </p>
 
                 <Link
                   to={`/services/${service.slug}`}
-                  className='mt-auto pt-3 sm:pt-2 flex sm:mt-6 flex items-center gap-3 text-[#020A23] text-[14px] sm:text-base font-semibold hover:gap-4 transition-all duration-300'>
+                  className='mt-auto pt-3 sm:pt-2 flex sm:mt-6 items-center gap-3 text-[#020A23] text-[14px] sm:text-base font-semibold hover:gap-4 transition-all duration-300'>
                   Learn more
                   <span className='text-xl cursor-pointer'>→</span>
                 </Link>
