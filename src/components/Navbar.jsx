@@ -98,8 +98,10 @@ const Navbar = () => {
         <img
           src={logo}
           alt='Bloombash Logo'
+          width={183}
+          height={40}
           onClick={() => navigate("/")}
-          className={`h-8 sm:h-10 cursor-pointer ${
+          className={`h-8 sm:h-10 w-auto cursor-pointer ${
             mounted ? "anim-visible" : "anim-hidden"
           }`}
           style={{
@@ -108,9 +110,8 @@ const Navbar = () => {
               : "none",
           }}
         />
-
         {/* Nav Links — desktop */}
-        <ul className='hidden lg:flex items-center gap-8 xl:gap-13'>
+        <ul className='hidden lg:flex items-center gap-8 xl:gap-8'>
           {navLinks.map((link, index) => (
             <li
               key={link.label}
@@ -124,7 +125,7 @@ const Navbar = () => {
               }}>
               <button
                 onClick={() => handleNavClick(link)}
-                className={`cursor-pointer font-semibold text-base xl:text-lg leading-none font-inter transition-colors ${
+                className={`cursor-pointer font-semibold xl:text-base leading-none font-inter transition-colors ${
                   isLinkActive(link)
                     ? "text-purple-700"
                     : "text-[#020A23] hover:text-purple-700"
@@ -194,7 +195,7 @@ const Navbar = () => {
             <li key={link.label} className='border-b border-gray-100'>
               <button
                 onClick={() => handleNavClick(link)}
-                className={`w-full text-left cursor-pointer font-semibold text-lg py-3 transition-colors ${
+                className={`w-full text-left cursor-pointer font-semibold text-base py-3 transition-colors ${
                   isLinkActive(link)
                     ? "text-purple-700"
                     : "text-[#020A23] hover:text-purple-700"
@@ -207,7 +208,7 @@ const Navbar = () => {
 
         <button
           onClick={handleGetStarted}
-          className='mt-8 w-full px-4 py-3 rounded-2xl text-white font-semibold text-lg cursor-pointer hover:opacity-90 transition-opacity'
+          className='mt-8 w-5/10 px-2 py-2.5 rounded-2xl text-white font-semibold text-base cursor-pointer hover:opacity-90 transition-opacity'
           style={{
             background: "linear-gradient(95.25deg, #472187 3%, #7C3AED 100%)",
           }}>

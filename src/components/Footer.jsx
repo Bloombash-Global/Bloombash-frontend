@@ -66,7 +66,9 @@ function Footer() {
             <img
               src={logo}
               alt='Bloombash Logo'
-              className={`w-40 sm:w-45 md:w-49.75 h-auto ${brandInView ? "anim-visible" : "anim-hidden"}`}
+              width={183}
+              height={40}
+              className={`h-8 sm:h-10 w-auto cursor-pointer ${brandInView ? "anim-visible" : "anim-hidden"}`}
               style={{
                 animation: brandInView
                   ? "fadeInLeft 0.7s cubic-bezier(0.22,1,0.36,1) both"
