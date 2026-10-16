@@ -43,13 +43,15 @@ function CoreValues() {
   const [cardsRef, cardsInView] = useInView({ threshold: 0.1 });
 
   return (
-    <section className='w-full bg-[#EAEAF8] py-12 sm:py-16 md:py-[90px]'>
-      <div className='max-w-[1330px] mx-auto px-4 sm:px-6'>
+    <section
+      id='values'
+      className='w-full bg-[#EAEAF8] py-12 sm:py-16 md:py-22.5'>
+      <div className='max-w-332.5 mx-auto px-4 sm:px-6'>
         {/* Header */}
         <div ref={headerRef} className='flex flex-col items-center'>
           {/* Badge */}
           <div
-            className={`flex items-center gap-2 sm:gap-[11px] rounded-[20px] border border-[#87848B] bg-[#7C3AED1A] px-3 sm:px-4 py-2 sm:py-[10px] ${headerInView ? "anim-visible" : "anim-hidden"}`}
+            className={`flex items-center gap-2 sm:gap-2.75 rounded-[20px] border border-[#87848B] bg-[#7C3AED1A] px-3 sm:px-4 py-2 sm:py-2.5 ${headerInView ? "anim-visible" : "anim-hidden"}`}
             style={{
               animation: headerInView
                 ? "scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) 0.1s both"
@@ -63,7 +65,7 @@ function CoreValues() {
 
           {/* Heading */}
           <h2
-            className={`mt-5 sm:mt-6 md:mt-8 text-center text-[28px] sm:text-[36px] md:text-[44px] lg:text-[48px] leading-[36px] sm:leading-[46px] md:leading-[58px] font-bold text-[#020A23] ${headerInView ? "anim-visible" : "anim-hidden"}`}
+            className={`mt-5 sm:mt-6 md:mt-8 text-center text-[28px] sm:text-[36px] md:text-[44px] lg:text-[48px] leading-9 sm:leading-11.5 md:leading-14.5 font-bold text-[#020A23] ${headerInView ? "anim-visible" : "anim-hidden"}`}
             style={{
               animation: headerInView
                 ? "fadeInUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s both"
@@ -74,7 +76,7 @@ function CoreValues() {
 
           {/* Description */}
           <p
-            className={`mt-3 sm:mt-4 md:mt-5 max-w-[580px] text-center text-[15px] sm:text-[17px] md:text-[18px] leading-[26px] sm:leading-[30px] md:leading-[32px] font-medium text-[#020A23CC] ${headerInView ? "anim-visible" : "anim-hidden"}`}
+            className={`mt-3 sm:mt-4 md:mt-5 max-w-145 text-center text-[15px] sm:text-[17px] md:text-[18px] leading-6.5 sm:leading-7.5 md:leading-8 font-medium text-[#020A23CC] ${headerInView ? "anim-visible" : "anim-hidden"}`}
             style={{
               animation: headerInView
                 ? "fadeInUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.35s both"
@@ -98,7 +100,7 @@ function CoreValues() {
                 border
                 border-[#87848B4D]
                 p-4 sm:p-5
-                min-h-[200px] sm:min-h-[230px] md:min-h-[250px]
+                min-h-50 sm:min-h-57.5 md:min-h-62.5
                 flex
                 flex-col
                 items-center
@@ -118,16 +120,16 @@ function CoreValues() {
               <img
                 src={value.icon}
                 alt={value.title}
-                className='w-[26px] h-[32px] sm:w-[30px] sm:h-[36px] object-contain'
+                className='w-6.5 h-8 sm:w-7.5 sm:h-9 object-contain'
               />
 
               {/* Title */}
-              <h3 className='mt-4 sm:mt-6 text-[14px] sm:text-[16px] leading-[22px] sm:leading-[26px] font-bold text-[#020A23]'>
+              <h3 className='mt-4 sm:mt-6 text-[14px] sm:text-[16px] leading-5.5 sm:leading-6.5 font-bold text-[#020A23]'>
                 {value.title}
               </h3>
 
               {/* Description */}
-              <p className='mt-2 sm:mt-4 text-[13px] sm:text-[14px] leading-[22px] sm:leading-[26px] font-semibold text-[#605F62]'>
+              <p className='mt-2 sm:mt-4 text-[13px] sm:text-[14px] leading-5.5 sm:leading-6.5 font-semibold text-[#605F62]'>
                 {value.description}
               </p>
             </div>
