@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import useInView from "../hooks/useInView";
-import { ArrowRight } from "lucide-react";
+// src/components/BuildCTA.jsx
+import { useNavigate } from "react-router-dom"
+import { ArrowRight } from "lucide-react"
+import useInView from "../hooks/useInView"
 
 const BuildCTA = () => {
-  const navigate = useNavigate();
-  const [ctaRef, ctaInView] = useInView({ threshold: 0.15 });
+  const navigate = useNavigate()
+  const [ctaRef, ctaInView] = useInView({ threshold: 0.15 })
 
   return (
     <section className='w-full bg-white py-8 sm:py-12 md:py-15'>
@@ -51,7 +52,10 @@ const BuildCTA = () => {
               className='group flex items-center justify-center gap-4 rounded-2xl px-5 py-2.5 h-13 font-semibold text-lg sm:text-xl transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer w-full sm:w-auto'
               style={{ background: "#FFC77A", color: "#020A23" }}>
               Start your project
-            
+              <ArrowRight
+                className='size-5 transition-transform duration-300 group-hover:translate-x-1'
+                aria-hidden='true'
+              />
             </button>
 
             <button
@@ -63,7 +67,7 @@ const BuildCTA = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default BuildCTA;
+export default BuildCTA
