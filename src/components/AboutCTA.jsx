@@ -1,6 +1,7 @@
 // src/components/AboutCTA.jsx
 import { useNavigate } from "react-router-dom";
 import useInView from "../hooks/useInView";
+import { ArrowRight } from "lucide-react";
 
 const AboutCTA = () => {
   const navigate = useNavigate();
@@ -35,9 +36,13 @@ const AboutCTA = () => {
           className={`w-full sm:w-auto flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mt-4 anim-hidden anim-fade-up ${visible} anim-delay-3`}>
           <button
             onClick={() => navigate("/start-a-project")}
-            className='w-full sm:w-auto flex items-center justify-center gap-2 bg-[#FFC77A] text-[#1A0B33] font-inter font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition-opacity cursor-pointer'>
+            className='group flex items-center justify-center gap-4 rounded-2xl px-5 py-2.5 h-13 font-semibold text-lg sm:text-xl transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer w-full sm:w-auto'
+            style={{ background: "#FFC77A", color: "#020A23" }}>
             Start your project
-            <span>→</span>
+            <ArrowRight
+              className='size-5 transition-transform duration-300 group-hover:translate-x-1'
+              aria-hidden='true'
+            />
           </button>
 
           <button
