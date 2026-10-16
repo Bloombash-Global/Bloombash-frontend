@@ -37,10 +37,18 @@ const footerSections = [
 ];
 
 const socialIcons = [
-  { icon: twitter, alt: "Twitter" },
-  { icon: linkedin, alt: "LinkedIn" },
-  { icon: instagram, alt: "Instagram" },
-  { icon: email, alt: "Email" },
+  { icon: twitter, alt: "X", url: "https://x.com/bloombashglobal" },
+  {
+    icon: linkedin,
+    alt: "LinkedIn",
+    url: "https://www.linkedin.com/company/bloombash",
+  },
+  {
+    icon: instagram,
+    alt: "Instagram",
+    url: "https://www.instagram.com/bloombash_global",
+  },
+  { icon: email, alt: "Email", url: "mailto:hello@bloombashglobal.com" },
 ];
 
 function Footer() {
@@ -49,16 +57,18 @@ function Footer() {
   const [bottomRef, bottomInView] = useInView({ threshold: 0.2 });
 
   return (
-    <footer className='bg-[#0E152C] text-white pt-12 sm:pt-16 md:pt-20 pb-6 sm:pb-8'>
-      <div className='max-w-[1245px] mx-auto px-4 sm:px-6'>
+    <footer className='bg-[#0E152C] text-white pt-12 sm:pt-16 md:pt-20 pb-6 sm:pb-8 overflow-x-hidden'>
+      <div className='max-w-311.25 mx-auto px-4 sm:px-6'>
         {/* Top Footer */}
         <div className='flex flex-col lg:flex-row justify-between gap-10 sm:gap-12 lg:gap-16'>
           {/* Brand */}
-          <div ref={brandRef} className='max-w-[307px]'>
+          <div ref={brandRef} className='max-w-76.75'>
             <img
               src={logo}
               alt='Bloombash Logo'
-              className={`w-[160px] sm:w-[180px] md:w-[199px] h-auto ${brandInView ? "anim-visible" : "anim-hidden"}`}
+              width={183}
+              height={40}
+              className={`h-8 sm:h-10 w-auto cursor-pointer ${brandInView ? "anim-visible" : "anim-hidden"}`}
               style={{
                 animation: brandInView
                   ? "fadeInLeft 0.7s cubic-bezier(0.22,1,0.36,1) both"
@@ -67,7 +77,7 @@ function Footer() {
             />
 
             <p
-              className={`mt-4 sm:mt-5 text-[14px] sm:text-[15px] leading-[26px] sm:leading-[30px] font-medium text-white/70 ${brandInView ? "anim-visible" : "anim-hidden"}`}
+              className={`mt-4 sm:mt-5 text-[14px] sm:text-[15px] leading-6.5 sm:leading-7.5 font-medium text-white/70 ${brandInView ? "anim-visible" : "anim-hidden"}`}
               style={{
                 animation: brandInView
                   ? "fadeInUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s both"
@@ -80,20 +90,28 @@ function Footer() {
             {/* Social Icons */}
             <div className='flex gap-3 sm:gap-4 mt-5 sm:mt-6'>
               {socialIcons.map((social, index) => (
-                <div
+                <a
                   key={social.alt}
-                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-[10px] border border-[#87848B] bg-white/10 flex items-center justify-center cursor-pointer hover:bg-purple-600 transition-colors duration-300 ${brandInView ? "anim-visible" : "anim-hidden"}`}
+                  href={social.url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  aria-label={social.alt}
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-[10px] border border-[#87848B] bg-white/10 flex items-center justify-center cursor-pointer hover:bg-purple-600 transition-colors duration-300 ${
+                    brandInView ? "anim-visible" : "anim-hidden"
+                  }`}
                   style={{
                     animation: brandInView
-                      ? `scaleIn 0.5s cubic-bezier(0.22,1,0.36,1) ${0.3 + index * 0.08}s both`
+                      ? `scaleIn 0.5s cubic-bezier(0.22,1,0.36,1) ${
+                          0.3 + index * 0.08
+                        }s both`
                       : "none",
                   }}>
                   <img
                     src={social.icon}
                     alt={social.alt}
-                    className='w-[16px] h-[16px] sm:w-[18px] sm:h-[18px]'
+                    className='w-4 h-4 sm:w-4.5 sm:h-4.5'
                   />
-                </div>
+                </a>
               ))}
             </div>
           </div>
@@ -101,7 +119,7 @@ function Footer() {
           {/* Links */}
           <div
             ref={linksRef}
-            className='grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-10 lg:gap-[86px]'>
+            className='grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-10 lg:gap-21.5'>
             {footerSections.map((section, sectionIndex) => (
               <div
                 key={section.title}
@@ -111,7 +129,7 @@ function Footer() {
                     ? `fadeInUp 0.6s cubic-bezier(0.22,1,0.36,1) ${sectionIndex * 0.1}s both`
                     : "none",
                 }}>
-                <h3 className='font-semibold text-[15px] sm:text-[16px] leading-[26px] sm:leading-[30px] mb-2 sm:mb-3'>
+                <h3 className='font-semibold text-[15px] sm:text-[16px] leading-6.5 sm:leading-7.5 mb-2 sm:mb-3'>
                   {section.title}
                 </h3>
 
@@ -119,10 +137,10 @@ function Footer() {
                   {section.links.map((link, linkIndex) => (
                     <li
                       key={link}
-                      className={`text-[13px] sm:text-[14px] leading-[26px] sm:leading-[30px] text-white/80 hover:text-white cursor-pointer transition-colors ${linksInView ? "anim-visible" : "anim-hidden"}`}
+                      className={`text-[12px] sm:text-[14px] leading-6.5 sm:leading-7.5 text-white/80 hover:text-white cursor-pointer transition-colors ${linksInView ? "anim-visible" : "anim-hidden"}`}
                       style={{
                         animation: linksInView
-                          ? `fadeIn 0.5s ease ${(sectionIndex * 0.1) + (linkIndex * 0.05) + 0.15}s both`
+                          ? `fadeIn 0.5s ease ${sectionIndex * 0.1 + linkIndex * 0.05 + 0.15}s both`
                           : "none",
                       }}>
                       {link}
