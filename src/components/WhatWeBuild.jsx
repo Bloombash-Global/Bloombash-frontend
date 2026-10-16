@@ -1,5 +1,6 @@
 import useInView from "../hooks/useInView";
 import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const services = [
   {
@@ -109,45 +110,46 @@ function WhatWeBuild() {
             <div
               key={service.title}
               className={`
-                bg-white
-                rounded-[10px]
-                border
-                border-[#87848B4D]
-                p-4 sm:p-5
-                min-h-62.5 sm:min-h-70 md:min-h-76.25
-                flex
-                flex-col
-                transition-all
-                duration-300
-                hover:-translate-y-1
-                hover:shadow-xl
-                ${cardsInView ? "anim-visible" : "anim-hidden"}
-              `}
+            bg-white
+            rounded-[10px]
+            border
+            border-[#87848B4D]
+            p-4 sm:p-5
+            min-h-62.5 sm:min-h-70 md:min-h-76.25
+            flex
+            flex-col
+            transition-all
+            duration-300
+            hover:-translate-y-1
+            hover:shadow-xl
+            ${cardsInView ? "anim-visible" : "anim-hidden"}
+          `}
               style={{
                 animation: cardsInView
                   ? `fadeInUp 0.6s cubic-bezier(0.22,1,0.36,1) ${index * 0.1}s both`
                   : "none",
               }}>
-              <div className='flex items-left justify-between flex-col'>
-                <div className='w-11.5 h-11.5 sm:w-12.5 sm:h-12.5 rounded-[10px] bg-[#F5F5F5] flex items-center justify-between text-xl sm:text-2xl'>
-                  {service.icon}
-                </div>
-
-                <h3 className='mt-4 sm:mt-6 text-[16px] sm:text-[18px] leading-6.5 sm:leading-7.5 font-bold text-[#020A23]'>
-                  {service.title}
-                </h3>
-
-                <p className='mt-2 sm:mt-3 text-[14px] sm:text-[16px] leading-6 sm:leading-7.5 font-medium text-[#605F62]'>
-                  {service.description}
-                </p>
-
-                <Link
-                  to={`/services/${service.slug}`}
-                  className='mt-auto pt-3 sm:pt-2 flex sm:mt-6 items-center gap-3 text-[#020A23] text-[14px] sm:text-base font-semibold hover:gap-4 transition-all duration-300'>
-                  Learn more
-                  <span className='text-xl cursor-pointer'>→</span>
-                </Link>
+              <div className='w-11.5 h-11.5 sm:w-12.5 sm:h-12.5 rounded-[10px] bg-[#F5F5F5] flex items-center justify-between text-xl sm:text-2xl'>
+                {service.icon}
               </div>
+
+              <h3 className='mt-4 sm:mt-6 text-[16px] sm:text-[18px] leading-6.5 sm:leading-7.5 font-bold text-[#020A23]'>
+                {service.title}
+              </h3>
+
+              <p className='mt-2 sm:mt-3 text-[14px] sm:text-[16px] leading-6 sm:leading-7.5 font-medium text-[#605F62]'>
+                {service.description}
+              </p>
+
+              <Link
+                to={`/services/${service.slug}`}
+                className='group mt-auto pt-4 flex items-center gap-2 text-[#020A23] text-[14px] sm:text-base font-semibold'>
+                Learn more
+                <ArrowRight
+                  className='size-5 transition-transform duration-300 group-hover:translate-x-1'
+                  aria-hidden='true'
+                />
+              </Link>
             </div>
           ))}
         </div>
