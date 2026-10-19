@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import useInView from "../hooks/useInView";
+import { ArrowRight } from "lucide-react";
 
-function BuildCTA() {
+const BuildCTA = () => {
   const navigate = useNavigate();
   const [ctaRef, ctaInView] = useInView({ threshold: 0.15 });
 
@@ -10,8 +11,9 @@ function BuildCTA() {
       <div className='max-w-300 mx-auto px-4 sm:px-6'>
         <div
           ref={ctaRef}
-          className={`flex flex-col items-center gap-8 sm:gap-10 md:gap-12 rounded-[20px] sm:rounded-[25px] md:rounded-[30px] bg-[#540FCB] py-10 px-5 ${ctaInView ? "anim-visible" : "anim-hidden"}`}
+          className={`flex flex-col items-center gap-8 sm:gap-10 md:gap-12 rounded-2xl sm:rounded-3xl py-10 px-5 ${ctaInView ? "anim-visible" : "anim-hidden"}`}
           style={{
+            background: "#540FCB",
             animation: ctaInView
               ? "scaleIn 0.8s cubic-bezier(0.22,1,0.36,1) both"
               : "none",
@@ -24,18 +26,19 @@ function BuildCTA() {
                 ? "fadeInUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s both"
                 : "none",
             }}>
-            <h2 className='text-center font-semibold text-[28px] sm:text-4xl md:text-[44px] lg:text-5xl leading-9.5 sm:leading-12 md:leading-16 tracking-[1%]'>
+            <h2 className='text-center font-semibold text-3xl sm:text-4xl lg:text-5xl leading-9.5 sm:leading-12 md:leading-16 tracking-normal'>
               <span className='text-white'>Have an Idea ?</span>
               <br />
-              <span className='text-[#FFC77A]'>Let's build it together.</span>
+              <span style={{ color: "#FFC77A" }}>Let's build it together.</span>
             </h2>
 
-            <p className='text-center font-semibold text-sm sm:text-[15px] md:text-base leading-6 sm:leading-7 md:leading-7.5 tracking-[2%] text-white px-2'>
+            <p className='text-center font-semibold text-sm sm:text-base leading-6 sm:leading-7 md:leading-7.5 tracking-wide text-white px-2'>
               Whether you're a founder with a bold vision or an enterprise ready
               for transformation — we're ready when you are.
             </p>
           </div>
 
+          {/* Buttons */}
           <div
             className={`flex flex-col sm:flex-row items-center gap-3 sm:gap-5 w-full px-4 sm:px-0 sm:w-auto ${ctaInView ? "anim-visible" : "anim-hidden"}`}
             style={{
@@ -45,14 +48,15 @@ function BuildCTA() {
             }}>
             <button
               onClick={() => navigate("/start-a-project")}
-              className='flex items-center justify-center gap-3.75 rounded-[15px] px-5 py-2.5 font-semibold text-lg sm:text-xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg cursor-pointer w-full sm:w-auto h-13 bg-[#FFC77A] text-[#020A23]'>
+              className='group flex items-center justify-center gap-4 rounded-2xl px-5 py-2.5 h-13 font-semibold text-lg sm:text-xl transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer w-full sm:w-auto'
+              style={{ background: "#FFC77A", color: "#020A23" }}>
               Start your project
-              <span>→</span>
+            
             </button>
 
             <button
               onClick={() => navigate("/contact")}
-              className='flex items-center justify-center rounded-[15px] px-5 py-2.5 font-semibold text-lg sm:text-xl text-white border border-white transition-all duration-300 hover:bg-white/10 w-full sm:w-auto h-13 cursor-pointer'>
+              className='flex items-center justify-center rounded-2xl px-5 py-2.5 h-13 font-semibold text-lg sm:text-xl text-white border border-white transition-all duration-300 hover:bg-white/10 cursor-pointer w-full sm:w-auto'>
               Book a free consultation
             </button>
           </div>
@@ -60,6 +64,6 @@ function BuildCTA() {
       </div>
     </section>
   );
-}
+};
 
 export default BuildCTA;

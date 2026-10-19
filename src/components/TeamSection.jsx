@@ -56,7 +56,7 @@ const TeamSection = () => {
   return (
     <section
       ref={sectionRef}
-      className='w-full py-16 sm:py-20 md:py-24 px-4 sm:px-6'>
+      className='w-full bg-white py-16 sm:py-20 md:py-24 px-4 sm:px-6'>
       <div className='max-w-6xl mx-auto'>
         {/* Header */}
         <div className='flex flex-col items-center text-center gap-3 sm:gap-4 mb-10 sm:mb-14 md:mb-16'>
