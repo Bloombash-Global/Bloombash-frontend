@@ -129,7 +129,7 @@ function WhatWeBuild() {
                   ? `fadeInUp 0.6s cubic-bezier(0.22,1,0.36,1) ${index * 0.1}s both`
                   : "none",
               }}>
-              <div className='w-11.5 h-11.5 sm:w-12.5 sm:h-12.5 rounded-[10px] bg-[#F5F5F5] flex items-center justify-between text-xl sm:text-2xl'>
+              <div className='w-11.5 h-11.5 sm:w-12.5 sm:h-12.5 rounded-[10px] bg-[#F5F5F5] flex items-center justify-center text-xl sm:text-2xl'>
                 {service.icon}
               </div>
 
@@ -137,7 +137,7 @@ function WhatWeBuild() {
                 {service.title}
               </h3>
 
-              <p className='mt-2 sm:mt-3 text-[14px] sm:text-[16px] leading-6 sm:leading-7.5 font-medium text-[#605F62]'>
+              <p className='mt-2 sm:mt-3 text-[14px] sm:text-[15px] leading-6 sm:leading-7.5 font-medium text-[#605F62]'>
                 {service.description}
               </p>
 
