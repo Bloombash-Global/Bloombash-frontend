@@ -1,5 +1,5 @@
 // src/components/Navbar.jsx
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/Bloombash Logo.png";
 
@@ -18,6 +18,7 @@ const Navbar = () => {
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const menuToggleRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -28,10 +29,7 @@ const Navbar = () => {
 
   // Track which scroll-section is in view (only matters on "/")
   useEffect(() => {
-    if (location.pathname !== "/") {
-      setActiveSection("");
-      return;
-    }
+    if (location.pathname !== "/") return;
 
     const scrollTargets = navLinks
       .filter(link => link.type === "scroll")
@@ -59,6 +57,20 @@ const Navbar = () => {
 
     return () => observer.disconnect();
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const handleKeyDown = event => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        menuToggleRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
 
   // Scroll to a section after navigating home from another page
   useEffect(() => {
@@ -153,10 +165,12 @@ const Navbar = () => {
 
         {/* Hamburger — mobile/tablet */}
         <button
+          ref={menuToggleRef}
           className='lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.25 cursor-pointer z-50'
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label='Toggle menu'
-          aria-expanded={menuOpen}>
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          aria-controls='mobile-navigation-menu'>
           <span
             className={`block w-6 h-0.5 bg-[#020A23] rounded transition-all duration-300 ${
               menuOpen ? "rotate-45 translate-y-2" : ""
@@ -176,8 +190,11 @@ const Navbar = () => {
       </div>
 
       {/* Mobile menu overlay */}
-      <div
-        className={`lg:hidden fixed inset-0 bg-black/40 transition-opacity duration-300 ${
+      <button
+        type='button'
+        aria-label='Dismiss menu overlay'
+        tabIndex={menuOpen ? 0 : -1}
+        className={`lg:hidden fixed inset-0 z-30 bg-black/40 transition-opacity duration-300 ${
           menuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -187,9 +204,13 @@ const Navbar = () => {
 
       {/* Mobile menu panel */}
       <div
-        className={`lg:hidden fixed top-0 right-0 h-full w-70 sm:w-80 bg-white shadow-2xl z-40 flex flex-col pt-24 pb-8 px-6 transition-transform duration-300 ease-in-out ${
+        id='mobile-navigation-menu'
+        aria-hidden={!menuOpen}
+        inert={!menuOpen}
+        className={`lg:hidden fixed inset-y-0 right-0 h-screen w-70 sm:w-80 bg-white shadow-2xl z-40 flex flex-col overflow-y-auto overscroll-contain pt-24 pb-8 px-6 transition-transform duration-300 ease-in-out ${
           menuOpen ? "translate-x-0" : "translate-x-full"
-        }`}>
+        }`}
+        style={{ height: "100dvh" }}>
         <ul className='flex flex-col gap-2'>
           {navLinks.map(link => (
             <li key={link.label} className='border-b border-gray-100'>
