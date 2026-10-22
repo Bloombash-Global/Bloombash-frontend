@@ -19,8 +19,16 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const menuToggleRef = useRef(null);
+  const menuPanelRef = useRef(null);
+  const desktopNavRef = useRef(null);
+  const pendingSectionRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const closeMobileMenu = () => {
+    menuToggleRef.current?.focus();
+    setMenuOpen(false);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => setMounted(true), 50);
@@ -61,15 +69,91 @@ const Navbar = () => {
   useEffect(() => {
     if (!menuOpen) return;
 
+    const panel = menuPanelRef.current;
+    const getFocusableElements = () =>
+      [...(panel?.querySelectorAll("button:not([disabled])") ?? [])];
+    getFocusableElements()[0]?.focus();
+
+    const scrollY = window.scrollY;
+    const previousBodyStyles = {
+      position: document.body.style.position,
+      top: document.body.style.top,
+      width: document.body.style.width,
+      overflow: document.body.style.overflow,
+    };
+    const previousDocumentOverflow = document.documentElement.style.overflow;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
     const handleKeyDown = event => {
       if (event.key === "Escape") {
-        setMenuOpen(false);
-        menuToggleRef.current?.focus();
+        closeMobileMenu();
+        return;
+      }
+
+      if (event.key === "Tab") {
+        const focusableElements = getFocusableElements();
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (!firstElement || !lastElement) {
+          event.preventDefault();
+        } else if (
+          event.shiftKey &&
+          (document.activeElement === firstElement ||
+            !panel?.contains(document.activeElement))
+        ) {
+          event.preventDefault();
+          lastElement.focus();
+        } else if (
+          !event.shiftKey &&
+          (document.activeElement === lastElement ||
+            !panel?.contains(document.activeElement))
+        ) {
+          event.preventDefault();
+          firstElement.focus();
+        }
       }
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      Object.assign(document.body.style, previousBodyStyles);
+      document.documentElement.style.overflow = previousDocumentOverflow;
+      window.scrollTo(0, scrollY);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (menuOpen || !pendingSectionRef.current) return;
+
+    const section = pendingSectionRef.current;
+    const frame = requestAnimationFrame(() => {
+      scrollToSection(section);
+      pendingSectionRef.current = null;
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const desktopBreakpoint = window.matchMedia("(min-width: 64rem)");
+    const handleBreakpointChange = event => {
+      if (event.matches) {
+        desktopNavRef.current?.querySelector("button")?.focus();
+        setMenuOpen(false);
+      }
+    };
+
+    desktopBreakpoint.addEventListener("change", handleBreakpointChange);
+    return () =>
+      desktopBreakpoint.removeEventListener("change", handleBreakpointChange);
   }, [menuOpen]);
 
   // Scroll to a section after navigating home from another page
@@ -88,6 +172,11 @@ const Navbar = () => {
   const handleNavClick = link => {
     if (link.type === "scroll") {
       if (location.pathname === "/") {
+        if (menuOpen) {
+          pendingSectionRef.current = link.target;
+          closeMobileMenu();
+          return;
+        }
         scrollToSection(link.target);
       } else {
         navigate("/", { state: { scrollTo: link.target } });
@@ -95,12 +184,12 @@ const Navbar = () => {
     } else {
       navigate(link.target);
     }
-    setMenuOpen(false);
+    closeMobileMenu();
   };
 
   const handleGetStarted = () => {
     navigate("/start-a-project");
-    setMenuOpen(false);
+    closeMobileMenu();
   };
 
   return (
@@ -123,7 +212,9 @@ const Navbar = () => {
           }}
         />
         {/* Nav Links — desktop */}
-        <ul className='hidden lg:flex items-center gap-8 xl:gap-8'>
+        <ul
+          ref={desktopNavRef}
+          className='hidden lg:flex items-center gap-8 xl:gap-8'>
           {navLinks.map((link, index) => (
             <li
               key={link.label}
@@ -193,17 +284,19 @@ const Navbar = () => {
       <button
         type='button'
         aria-label='Dismiss menu overlay'
-        tabIndex={menuOpen ? 0 : -1}
+        aria-hidden='true'
+        tabIndex={-1}
         className={`lg:hidden fixed inset-0 z-30 bg-black/40 transition-opacity duration-300 ${
           menuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
-        onClick={() => setMenuOpen(false)}
+        onClick={closeMobileMenu}
       />
 
       {/* Mobile menu panel */}
       <div
+        ref={menuPanelRef}
         id='mobile-navigation-menu'
         aria-hidden={!menuOpen}
         inert={!menuOpen}
