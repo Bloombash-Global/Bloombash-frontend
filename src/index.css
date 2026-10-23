@@ -23,9 +23,6 @@ html {
   font-family: Inter, sans-serif;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
