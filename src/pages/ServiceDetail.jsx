@@ -1,6 +1,7 @@
 // src/pages/ServiceDetail.jsx
 import { useParams, Link, Navigate } from "react-router-dom";
 import { services, serviceOrder } from "../data/servicesData";
+import { ArrowLeft } from "lucide-react";
 import useInView from "../hooks/useInView";
 
 const COLUMN_DELAYS = ["", "anim-delay-2"];
@@ -58,7 +59,11 @@ const ServiceContent = ({ service, slug }) => {
         ref={backRef}
         to='/'
         className={`flex items-center w-fit gap-2 text-slate-900 font-medium mb-8 anim-hidden anim-fade-down ${back}`}>
-        ← Back to Solutions
+        <ArrowLeft
+          className='size-5 transition-transform duration-300 group-hover:translate-x-1'
+          aria-hidden='true'
+        />
+        Back to Solutions
       </Link>
 
       <div className='grid md:grid-cols-[280px_1fr] gap-8 max-w-6xl mx-auto'>

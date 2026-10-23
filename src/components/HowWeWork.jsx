@@ -56,6 +56,7 @@ function HowWeWork() {
   return (
     <section className='w-full bg-white py-12 sm:py-16 md:py-22.5'>
       <div className='mx-auto max-w-327 px-4 sm:px-6'>
+        {/* Header */}
         <div ref={headerRef} className='flex flex-col items-center'>
           <div
             className={`flex items-center gap-2 sm:gap-2.75 rounded-full border border-[#87848B] bg-[#7C3AED1A] px-3 py-2 sm:px-4 sm:py-2.5 ${
@@ -140,17 +141,16 @@ function HowWeWork() {
                   </span>
                 </div>
 
-                <h3 className='mt-6 text-xl font-semibold leading-relaxed text-black'>
+                <h3 className='mt-6 text-xl font-semibold leading-relaxed tracking-wide text-black'>
                   {step.title}
                 </h3>
 
-                <p className='mt-3 text-base font-medium leading-relaxed text-[#605F62]'>
+                <p className='mt-3 font-medium text-base leading-relaxed tracking-wide text-[#605F62]'>
                   {step.description}
                 </p>
               </div>
             ))}
           </div>
-
           {/* Mobile/tablet: vertical layout */}
           <div className='relative flex flex-col items-center gap-0 lg:hidden'>
             <div
@@ -189,11 +189,11 @@ function HowWeWork() {
                 </div>
 
                 <div className='text-center sm:text-left'>
-                  <h3 className='text-lg font-semibold leading-relaxed text-black sm:text-xl'>
+                  <h3 className='text-lg font-semibold leading-relaxed tracking-wide text-black sm:text-xl'>
                     {step.title}
                   </h3>
 
-                  <p className='mt-2 text-sm font-medium leading-6 text-[#605F62] sm:text-base sm:leading-relaxed'>
+                  <p className='mt-2 text-sm font-medium leading-6 tracking-wide text-[#605F62] sm:text-base sm:leading-relaxed'>
                     {step.description}
                   </p>
                 </div>
