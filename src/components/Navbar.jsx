@@ -26,7 +26,7 @@ const Navbar = () => {
   const location = useLocation();
 
   const closeMobileMenu = () => {
-    menuToggleRef.current?.focus();
+    if (menuOpen) menuToggleRef.current?.focus();
     setMenuOpen(false);
   };
 
@@ -35,7 +35,7 @@ const Navbar = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Track which scroll-section is in view (only matters on "/")
+  // Track which scroll-section is currently in view (only matters on "/")
   useEffect(() => {
     if (location.pathname !== "/") return;
 
@@ -90,7 +90,8 @@ const Navbar = () => {
 
     const handleKeyDown = event => {
       if (event.key === "Escape") {
-        closeMobileMenu();
+        menuToggleRef.current?.focus();
+        setMenuOpen(false);
         return;
       }
 
@@ -322,7 +323,7 @@ const Navbar = () => {
 
         <button
           onClick={handleGetStarted}
-          className='mt-8 w-5/10 px-2 py-2.5 rounded-2xl text-white font-semibold text-base cursor-pointer hover:opacity-90 transition-opacity'
+          className='mt-8 w-full px-4 py-3 rounded-[15px] text-white font-semibold text-[18px] cursor-pointer hover:opacity-90 transition-opacity'
           style={{
             background: "linear-gradient(95.25deg, #472187 3%, #7C3AED 100%)",
           }}>

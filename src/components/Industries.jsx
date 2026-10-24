@@ -22,8 +22,8 @@ function Industries() {
   return (
     <section
       id='industries'
-      className='w-full bg-[#EAEAF8] py-12 sm:py-14 md:py-17'>
-      <div className='max-w-267.75 mx-auto px-4 sm:px-6'>
+      className='w-full bg-[#EAEAF8] py-12 sm:py-14 md:py-[68px]'>
+      <div className='max-w-[1071px] mx-auto px-4 sm:px-6'>
         {/* Header */}
         <div ref={headerRef} className='flex flex-col items-center'>
           {/* Badge */}
