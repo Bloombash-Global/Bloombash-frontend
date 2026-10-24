@@ -124,7 +124,7 @@ function WhatWeBuild() {
                 {service.title}
               </h3>
 
-              <p className='mt-2 sm:mt-3 text-[14px] sm:text-[16px] leading-6 sm:leading-7.5 font-medium text-[#605F62]'>
+              <p className='mt-2 sm:mt-3 text-[14px] sm:text-[15px] leading-6 sm:leading-7.5 font-medium text-[#605F62]'>
                 {service.description}
               </p>
 
