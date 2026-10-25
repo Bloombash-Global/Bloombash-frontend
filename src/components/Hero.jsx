@@ -41,7 +41,7 @@ const Hero = () => {
   }, [])
 
   return (
-    <section className="md:min-h2 relative mt-10 flex w-full flex-col items-center overflow-hidden border-amber-50 px-6 pt-28 pb-12 text-center sm:px-8 sm:pt-30 md:pt-32 md:pb-10">
+    <section className="md:min-h2 relative flex w-full flex-col items-center overflow-hidden border-amber-50 px-6 pt-8 pb-12 text-center sm:px-8 sm:pt-10 md:pt-12 md:pb-10">
       <div
         aria-hidden="true"
         className="hero-background-pan absolute inset-[-6%] z-0 bg-cover bg-center"
