@@ -194,8 +194,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className='w-full bg-[#EAEAF880] relative z-50 top-0 p-2'>
-      <div className='flex items-center justify-between mx-auto max-w-312 h-15 md:h-20 px-4 sm:px-6'>
+    <nav className="fixed top-0 z-50 w-full bg-gray-200 p-3 sm:p-4">
+      <div className="mx-auto flex h-16 max-w-312 items-center justify-between px-5 sm:px-8 md:h-20">
         {/* Logo */}
         <img
           src={logo}
