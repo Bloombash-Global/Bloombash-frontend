@@ -1,6 +1,7 @@
 // src/components/Navbar.jsx
 import { useEffect, useRef, useState } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
+import { Rocket } from "lucide-react"
 import logo from "../assets/Bloombash Logo.png"
 
 const navLinks = [
@@ -209,13 +210,16 @@ const Navbar = () => {
         {/* CTA Button — desktop */}
         <button
           onClick={handleGetStarted}
-          className={`hidden cursor-pointer rounded-2xl px-4 py-2.5 text-base font-semibold text-white transition-opacity hover:opacity-90 lg:block xl:text-lg ${mounted ? "anim-visible" : "anim-hidden"}`}
+          className={`group relative hidden h-12 w-38 cursor-pointer items-center justify-center overflow-hidden rounded-2xl bg-size-[200%_100%] bg-left px-4 text-base font-semibold text-white transition-[background-position] duration-500 hover:bg-right focus-visible:bg-right motion-reduce:transition-none lg:flex xl:text-lg ${mounted ? "anim-visible" : "anim-hidden"}`}
           style={{
-            background: "linear-gradient(95.25deg, #472187 3%, #7C3AED 100%)",
+            backgroundImage: "linear-gradient(110deg, #472187 0%, #7034D6 50%, #7C3AED 100%)",
             animation: mounted ? "fadeInRight 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s both" : "none",
           }}
         >
-          Get Started
+          <span className="transition-transform duration-300 ease-out group-hover:-translate-x-3 group-focus-visible:-translate-x-3 motion-reduce:transition-none">Get Started</span>
+          <span className="absolute top-1/2 right-3 translate-x-[110%] -translate-y-1/2 rotate-45 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0 group-hover:rotate-0 group-focus-visible:translate-x-0 group-focus-visible:rotate-0 motion-reduce:transition-none">
+            <Rocket aria-hidden="true" className="block h-5 w-5" />
+          </span>
         </button>
 
         {/* Hamburger — mobile/tablet */}
@@ -243,9 +247,9 @@ const Navbar = () => {
 
         <button
           onClick={handleGetStarted}
-          className="mt-8 w-full cursor-pointer rounded-[15px] px-4 py-3 text-[18px] font-semibold text-white transition-opacity hover:opacity-90"
+          className="mt-8 flex h-12 w-fit cursor-pointer items-center justify-center overflow-hidden rounded-[15px] bg-left px-4 text-[18px] font-semibold text-white"
           style={{
-            background: "linear-gradient(95.25deg, #472187 3%, #7C3AED 100%)",
+            backgroundImage: "linear-gradient(110deg, #472187 0%, #7034D6 50%, #7C3AED 100%)",
           }}
         >
           Get Started
