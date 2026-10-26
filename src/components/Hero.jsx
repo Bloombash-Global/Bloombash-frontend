@@ -101,7 +101,7 @@ const Hero = () => {
       >
         <button
           onClick={() => navigate("/start-a-project")}
-          className="h-13 w-full cursor-pointer rounded-2xl text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg sm:h-14 sm:w-55 sm:text-xl md:h-15 md:w-60"
+          className="h-14 w-60 cursor-pointer rounded-2xl text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg sm:w-55 sm:text-xl md:h-15 md:w-60"
           style={{
             background: "linear-gradient(95.25deg,#472187 3%,#7C3AED 100%)",
           }}
@@ -109,7 +109,7 @@ const Hero = () => {
           Start a Project
         </button>
 
-        <button className="flex h-13 w-full cursor-pointer items-center justify-center gap-3 rounded-2xl border-2 border-white/70 text-lg font-semibold text-white transition-all duration-300 hover:bg-white/15 sm:h-14 sm:w-55 sm:text-xl md:h-15 md:w-60">
+        <button className="flex h-14 w-60 cursor-pointer items-center justify-center gap-3 rounded-2xl border-2 border-white/70 text-lg font-semibold text-white transition-all duration-300 hover:bg-white/15 sm:w-55 sm:text-xl md:h-15 md:w-60">
           <img src={playBtn} alt="" aria-hidden="true" className="h-4 w-4 brightness-0 invert sm:h-5 sm:w-5" />
           Watch Our Story
         </button>
