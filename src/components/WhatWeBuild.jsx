@@ -13,7 +13,7 @@ const services = [
   {
     icon: "🤖",
     slug: "ai-solutions",
-    title: "AI Powered Solutions & Automation",
+    title: "AI Powered Solutions & Automation Tools",
     description:
       "Intelligent systems and automation tools that streamline operations and unlock new possibilities for your business.",
   },
@@ -73,9 +73,8 @@ function WhatWeBuild() {
                 ? "scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) 0.1s both"
                 : "none",
             }}>
-            <span className='w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#7C3AED]' />
-
-            <span className='uppercase text-[12px] sm:text-[14px] md:text-[15px] font-extrabold tracking-[1px] text-[#420C9F]'>
+            <span className='w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-violet-600' />
+            <span className='uppercase text-xs sm:text-sm font-extrabold tracking-wide text-violet-800'>
               What We Build
             </span>
           </div>
@@ -88,7 +87,7 @@ function WhatWeBuild() {
                 : "none",
             }}>
             End-to-End Technology{" "}
-            <span className='text-[#7C3AED]'>Solutions</span>
+            <span className='text-violet-600'>Solutions</span>
           </h2>
 
           <p
@@ -98,7 +97,7 @@ function WhatWeBuild() {
                 ? "fadeInUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.35s both"
                 : "none",
             }}>
-            From concept to scale – we handle every layer of your digital
+            From concept to scale - we handle every layer of your digital
             transformation journey.
           </p>
         </div>
@@ -108,28 +107,16 @@ function WhatWeBuild() {
           className='mt-10 sm:mt-12 md:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5'>
           {services.map((service, index) => (
             <div
-              key={service.title}
-              className={`
-            bg-white
-            rounded-[10px]
-            border
-            border-[#87848B4D]
-            p-4 sm:p-5
-            min-h-62.5 sm:min-h-70 md:min-h-76.25
-            flex
-            flex-col
-            transition-all
-            duration-300
-            hover:-translate-y-1
-            hover:shadow-xl
-            ${cardsInView ? "anim-visible" : "anim-hidden"}
-          `}
+              key={service.slug}
+              className={`bg-white rounded-[10px] border border-[#87848B4D] p-4 sm:p-5 min-h-62.5 sm:min-h-70 md:min-h-76.25 flex flex-col items-start transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                cardsInView ? "anim-visible" : "anim-hidden"
+              }`}
               style={{
                 animation: cardsInView
                   ? `fadeInUp 0.6s cubic-bezier(0.22,1,0.36,1) ${index * 0.1}s both`
                   : "none",
               }}>
-              <div className='w-11.5 h-11.5 sm:w-12.5 sm:h-12.5 rounded-[10px] bg-[#F5F5F5] flex items-center justify-between text-xl sm:text-2xl'>
+              <div className='w-11.5 h-11.5 sm:w-12.5 sm:h-12.5 rounded-[10px] bg-[#F5F5F5] flex items-center justify-center text-xl sm:text-2xl'>
                 {service.icon}
               </div>
 
@@ -137,7 +124,7 @@ function WhatWeBuild() {
                 {service.title}
               </h3>
 
-              <p className='mt-2 sm:mt-3 text-[14px] sm:text-[16px] leading-6 sm:leading-7.5 font-medium text-[#605F62]'>
+              <p className='mt-2 sm:mt-3 text-[14px] sm:text-[15px] leading-6 sm:leading-7.5 font-medium text-[#605F62]'>
                 {service.description}
               </p>
 

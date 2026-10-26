@@ -45,8 +45,8 @@ function CoreValues() {
   return (
     <section
       id='values'
-      className='w-full bg-[#EAEAF8] py-12 sm:py-16 md:py-22.5'>
-      <div className='max-w-332.5 mx-auto px-4 sm:px-6'>
+      className='w-full bg-[#EAEAF8] py-12 sm:py-16 md:py-[90px]'>
+      <div className='max-w-[1330px] mx-auto px-4 sm:px-6'>
         {/* Header */}
         <div ref={headerRef} className='flex flex-col items-center'>
           {/* Badge */}

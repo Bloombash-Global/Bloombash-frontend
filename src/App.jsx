@@ -1,8 +1,8 @@
 import "./animations.css";
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
+import Navbar from "./components/Navbar";
 import ScrollTopBtn from "./components/ScrollTopBtn";
 
 const Home = lazy(() => import("./pages/Home"));

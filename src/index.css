@@ -30,3 +30,34 @@ html {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.hero-background-pan {
+  animation: hero-background-pan 14s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes hero-background-pan {
+  0%,
+  100% {
+    transform: translate(-1.5%, -0.8%) rotate(-0.6deg) scale(1.05);
+  }
+
+  25% {
+    transform: translate(1%, -1.2%) rotate(0.3deg) scale(1.05);
+  }
+
+  50% {
+    transform: translate(1.5%, 0.8%) rotate(0.6deg) scale(1.05);
+  }
+
+  75% {
+    transform: translate(-1%, 0.2%) rotate(-0.3deg) scale(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-background-pan {
+    animation: none;
+    transform: none;
+  }
+}
