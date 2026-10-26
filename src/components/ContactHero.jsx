@@ -27,19 +27,9 @@ function ContactHero() {
           <ContactInfoCard icon={<img src={Mail} alt="Email" className="h-5 w-5" />} title="Email Us">
             Our friendly team is here to help
             <br />
-            <a href="mailto:admin@bloombashglobal.com" className="text-purple-600 hover:underline">
-              admin@bloombashglobal.com
+            <a href="mailto:hello@bloombashglobal.com" className="text-purple-600 hover:underline">
+              hello@bloombashglobal.com
             </a>
-          </ContactInfoCard>
-        </div>
-
-        <div className={`anim-hidden anim-fade-up ${visible} anim-delay-4`}>
-          <ContactInfoCard icon={<img src={Location} alt="Location" className="h-5 w-5" />} title="Global HQ">
-            Come say hello at our office.
-            <br />
-            100 Innovation Drive, Tech District
-            <br />
-            San Francisco, CA 94105
           </ContactInfoCard>
         </div>
 
