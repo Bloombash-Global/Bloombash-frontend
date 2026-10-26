@@ -1,6 +1,5 @@
 import ContactInfoCard from "./ContactInfoCard"
 import Mail from "../assets/Mail.png"
-import Location from "../assets/Location.png"
 import Phone from "../assets/Phone.png"
 import useInView from "../hooks/useInView"
 
