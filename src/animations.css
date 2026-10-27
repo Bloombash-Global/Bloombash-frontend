@@ -84,6 +84,17 @@
   }
 }
 
+@keyframes statRollIn {
+  from {
+    opacity: 0;
+    transform: translateY(-0.75em) rotateX(75deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
 /* ── Animation Utility Classes ──────────────────────── */
 
 /* Base hidden state — elements start invisible and animate in */
@@ -131,6 +142,12 @@
   transform-origin: left center;
 }
 
+.stat-roll-in {
+  display: inline-block;
+  transform-origin: center bottom;
+  animation: statRollIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 /* ── Staggered delay utilities ──────────────────────── */
 
 .anim-delay-1 { animation-delay: 0.1s; }
@@ -152,4 +169,10 @@
 
 .anim-duration-fast {
   animation-duration: 0.4s !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-roll-in {
+    animation: none;
+  }
 }
