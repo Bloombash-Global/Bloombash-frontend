@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import useInView from "../hooks/useInView";
 
 function ProjectHero() {
@@ -6,6 +7,31 @@ function ProjectHero() {
     rootMargin: "0px 0px -50px 0px",
   });
   const visible = isInView ? "anim-visible" : "";
+  const [prefersReducedMotion] = useState(() =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+  const [hours, setHours] = useState(0);
+
+  useEffect(() => {
+    if (!isInView || prefersReducedMotion) return;
+
+    const duration = 1200;
+    let startTime;
+    let frameId;
+
+    const countUp = timestamp => {
+      if (startTime === undefined) startTime = timestamp;
+
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const easedProgress = 1 - (1 - progress) ** 3;
+      setHours(Math.round(easedProgress * 24));
+
+      if (progress < 1) frameId = requestAnimationFrame(countUp);
+    };
+
+    frameId = requestAnimationFrame(countUp);
+    return () => cancelAnimationFrame(frameId);
+  }, [isInView, prefersReducedMotion]);
 
   return (
     <div ref={sectionRef} className='max-w-lg'>
@@ -31,12 +57,19 @@ function ProjectHero() {
       <div className='grid grid-cols-2 gap-4'>
         <div
           className={`bg-gray-100  rounded-xl p-6 border border-gray-100 anim-hidden anim-scale-in ${visible} anim-delay-4 `}>
-          <p className='text-3xl font-bold text-purple-600 mb-1'>24h</p>
+          <p
+            aria-label={`${prefersReducedMotion ? 24 : hours} hours`}
+            className='text-3xl font-bold text-purple-600 mb-1'>
+            {prefersReducedMotion ? 24 : hours}h
+          </p>
           <p className='text-gray-900 font-medium'>Initial Response Time</p>
         </div>
         <div
           className={`bg-gray-100 rounded-xl p-6 border border-gray-100 anim-hidden anim-scale-in ${visible} anim-delay-5`}>
-          <p className='text-3xl font-bold text-purple-600 mb-1'>1st</p>
+          <p className='text-3xl font-bold text-purple-600 mb-1'>
+            <span className={isInView ? "stat-roll-in" : "opacity-0"}>1</span>
+            <span>st</span>
+          </p>
           <p className='text-gray-900 font-medium'>Step: Discovery Call</p>
         </div>
       </div>
