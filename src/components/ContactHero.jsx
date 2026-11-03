@@ -36,7 +36,7 @@ function ContactHero() {
           <ContactInfoCard icon={<img src={Phone} alt="Phone" className="h-5 w-5" />} title="Call Us">
             Mon-Fri from 8am-5pm
             <br />
-            +234 9074 6275 50
+            +234 907 462 7550
           </ContactInfoCard>
         </div>
       </div>
