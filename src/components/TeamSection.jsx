@@ -144,7 +144,7 @@ const TeamSection = () => {
           <div
             ref={scrollRef}
             onScroll={updateScrollState}
-            className='flex gap-4 sm:gap-6 md:gap-8 overflow-x-auto pb-4 px-6 sm:px-0 snap-x snap-mandatory scrollbar-hide'>
+            className='flex items-start gap-4 sm:gap-6 md:gap-8 overflow-x-auto pb-4 px-6 sm:px-0 snap-x snap-mandatory scrollbar-hide'>
             {team.map((member, index) => (
               <div
                 key={member.name}

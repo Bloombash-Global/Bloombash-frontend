@@ -1,7 +1,8 @@
 // src/components/Navbar.jsx
 import { useEffect, useRef, useState } from "react"
+import { createPortal } from "react-dom"
 import { useNavigate, useLocation } from "react-router-dom"
-import { Rocket } from "lucide-react"
+import { Rocket, X } from "lucide-react"
 import logo from "../assets/Bloombash Logo.png"
 
 const navLinks = [
@@ -64,6 +65,7 @@ const Navbar = () => {
     return () => observer.disconnect()
   }, [location.pathname])
 
+  // Focus trap + scroll lock while the mobile menu is open
   useEffect(() => {
     if (!menuOpen) return
 
@@ -149,9 +151,9 @@ const Navbar = () => {
   useEffect(() => {
     if (location.pathname === "/" && location.state?.scrollTo) {
       scrollToSection(location.state.scrollTo)
-      window.history.replaceState({}, "") // so a refresh doesn't re-scroll
+      navigate("/", { replace: true, state: null }) // so a refresh doesn't re-scroll
     }
-  }, [location])
+  }, [location, navigate])
 
   const isLinkActive = (link) => {
     if (link.type === "route") return location.pathname === link.target
@@ -182,7 +184,8 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-gray-200 p-2">
+    <>
+    <nav className={`${menuOpen ? "fixed top-0 left-0 z-30" : "sticky top-0 z-50"} w-full bg-gray-200 p-2`}>
       <div className="mx-auto flex h-15 max-w-312 items-center justify-between px-4 sm:px-6 md:h-20">
         {/* Logo */}
         <img
@@ -230,32 +233,42 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile menu overlay */}
-      <button type="button" aria-label="Dismiss menu overlay" aria-hidden="true" tabIndex={-1} className={`fixed inset-0 z-30 bg-black/40 transition-opacity duration-300 lg:hidden ${menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`} onClick={closeMobileMenu} />
+      {createPortal(
+        <>
+          {/* Mobile menu overlay */}
+          <button type="button" aria-label="Dismiss menu overlay" aria-hidden="true" tabIndex={-1} className={`fixed inset-0 z-30 bg-black/40 transition-opacity duration-300 lg:hidden ${menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`} onClick={closeMobileMenu} />
 
-      {/* Mobile menu panel */}
-      <div ref={menuPanelRef} id="mobile-navigation-menu" aria-hidden={!menuOpen} inert={!menuOpen} className={`fixed inset-y-0 right-0 z-40 flex h-screen w-70 flex-col overflow-y-auto overscroll-contain bg-white px-6 pt-24 pb-8 shadow-2xl transition-transform duration-300 ease-in-out sm:w-80 lg:hidden ${menuOpen ? "translate-x-0" : "translate-x-full"}`} style={{ height: "100dvh" }}>
-        <ul className="flex flex-col gap-2">
-          {navLinks.map((link) => (
-            <li key={link.label} className="border-b border-gray-100">
-              <button onClick={() => handleNavClick(link)} className={`w-full cursor-pointer py-3 text-left text-base font-semibold transition-colors ${isLinkActive(link) ? "text-purple-700" : "text-[#020A23] hover:text-purple-700"}`}>
-                {link.label}
-              </button>
-            </li>
-          ))}
-        </ul>
+          {/* Mobile menu panel */}
+          <div ref={menuPanelRef} id="mobile-navigation-menu" aria-hidden={!menuOpen} inert={!menuOpen} className={`fixed inset-y-0 right-0 z-40 flex w-70 flex-col overflow-y-auto overscroll-contain bg-white px-6 pt-24 pb-8 shadow-2xl transition-transform duration-300 ease-in-out sm:w-80 lg:hidden ${menuOpen ? "translate-x-0" : "translate-x-full"}`}>
+            <button type="button" aria-label="Close menu" onClick={closeMobileMenu} className="absolute top-5 right-5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-[#020A23] hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-700">
+              <X size={24} aria-hidden="true" />
+            </button>
+            <ul className="flex flex-col gap-2">
+              {navLinks.map((link) => (
+                <li key={link.label} className="border-b border-gray-100">
+                  <button onClick={() => handleNavClick(link)} className={`w-full cursor-pointer py-3 text-left text-base font-semibold transition-colors ${isLinkActive(link) ? "text-purple-700" : "text-[#020A23] hover:text-purple-700"}`}>
+                    {link.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
 
-        <button
-          onClick={handleGetStarted}
-          className="mt-8 flex h-12 w-fit cursor-pointer items-center justify-center overflow-hidden rounded-[15px] bg-left px-4 text-[18px] font-semibold text-white"
-          style={{
-            backgroundImage: "linear-gradient(110deg, #472187 0%, #7034D6 50%, #7C3AED 100%)",
-          }}
-        >
-          Get Started
-        </button>
-      </div>
+            <button
+              onClick={handleGetStarted}
+              className="mt-8 flex h-12 w-fit cursor-pointer items-center justify-center overflow-hidden rounded-[15px] px-4 text-[18px] font-semibold text-white"
+              style={{
+                backgroundImage: "linear-gradient(110deg, #472187 0%, #7034D6 50%, #7C3AED 100%)",
+              }}
+            >
+              Get Started
+            </button>
+          </div>
+        </>,
+        document.body
+      )}
     </nav>
+    {menuOpen && <div aria-hidden="true" className="h-19 md:h-24 lg:hidden" />}
+    </>
   )
 }
 
